@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoho CRM - Solar Industry Blueprint</title>
+<style>
+:root{--primary:#294a85;--primary-dark:#1e3a6e;--primary-light:#3a5f9e;--accent:#e8a838;--bg:#f0f2f5;--white:#fff;--border:#d0d5dd;--text:#333;--text-light:#666;--success:#2e7d32;--danger:#c62828;--warning:#f57c00;--sidebar-w:220px;--top-h:48px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;font-size:13px}
+button{cursor:pointer;font-size:13px;border:none;outline:none}
+input,select,textarea{font-size:13px;border:1px solid var(--border);border-radius:3px;padding:6px 10px;outline:none;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--primary)}
+textarea{resize:vertical;min-height:60px}
+
+/* TOPBAR */
+.topbar{height:var(--top-h);background:var(--primary);display:flex;align-items:center;padding:0 12px;position:fixed;top:0;left:0;right:0;z-index:100;gap:12px}
+.topbar .logo{color:var(--white);font-weight:700;font-size:18px;white-space:nowrap;margin-right:10px}
+.topbar .logo span{color:var(--accent)}
+.topbar .search-bar{flex:1;max-width:400px;display:flex}
+.topbar .search-bar input{background:rgba(255,255,255,0.15);border:none;color:var(--white);padding:7px 12px;border-radius:4px}
+.topbar .search-bar input::placeholder{color:rgba(255,255,255,0.6)}
+.topbar .search-bar input:focus{background:rgba(255,255,255,0.25)}
+.topbar-actions{display:flex;gap:6px;margin-left:auto}
+.topbar-actions button{background:transparent;color:var(--white);padding:6px 10px;border-radius:4px;display:flex;align-items:center;gap:5px;transition:background 0.2s}
+.topbar-actions button:hover{background:rgba(255,255,255,0.15)}
+.topbar-actions button .badge{background:var(--accent);color:var(--primary);border-radius:10px;padding:1px 6px;font-size:10px;font-weight:700}
+.topbar .user-menu{color:var(--white);display:flex;align-items:center;gap:8px;padding:4px 8px;border-radius:4px;cursor:pointer;transition:background 0.2s}
+.topbar .user-menu:hover{background:rgba(255,255,255,0.15)}
+.topbar .user-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary);font-size:12px}
+
+/* LAYOUT */
+.layout{display:flex;height:calc(100vh - var(--top-h));margin-top:var(--top-h)}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--white);border-right:1px solid var(--border);overflow-y:auto;flex-shrink:0;padding-bottom:20px}
+.sidebar-section{margin-top:8px}
+.sidebar-section-title{padding:6px 14px;font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:0.5px}
+.sidebar-item{padding:9px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.15s;color:var(--text);border-left:3px solid transparent;margin:1px 0}
+.sidebar-item:hover{background:#f5f7ff}
+.sidebar-item.active{background:#eef2fb;color:var(--primary);border-left-color:var(--primary);font-weight:600}
+.sidebar-item .icon{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sidebar-item .icon svg{width:16px;height:16px}
+.sidebar-item .count{background:var(--bg);padding:2px 7px;border-radius:10px;font-size:11px;color:var(--text-light);margin-left:auto}
+
+/* MAIN CONTENT */
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.content-header{background:var(--white);padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.content-header h1{font-size:18px;font-weight:700;color:var(--primary);flex:1}
+.content-header h1 .module-icon{margin-right:8px}
+.btn{padding:7px 14px;border-radius:4px;display:inline-flex;align-items:center;gap:6px;font-weight:600;transition:all 0.15s;white-space:nowrap}
+.btn-primary{background:var(--primary);color:var(--white)}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-secondary{background:var(--white);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--bg)}
+.btn-success{background:var(--success);color:var(--white)}
+.btn-success:hover{background:#1b5e20}
+.btn-danger{background:var(--danger);color:var(--white)}
+.btn-danger:hover{background:#b71c1c}
+.btn-sm{padding:4px 10px;font-size:12px}
+.btn-group{display:flex;gap:6px;flex-wrap:wrap}
+.header-actions{display:flex;gap:6px;align-items:center}
+
+/* TOOLBAR */
+.toolbar{background:var(--white);padding:10px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.toolbar input.search{width:220px}
+
+/* LIST VIEW */
+.list-container{flex:1;overflow:auto;background:var(--white);margin:0}
+.list-table{width:100%;border-collapse:collapse;min-width:800px}
+.list-table thead{position:sticky;top:0;z-index:10;background:var(--bg)}
+.list-table th{padding:10px 12px;text-align:left;font-weight:700;font-size:12px;color:var(--text-light);border-bottom:2px solid var(--border);white-space:nowrap}
+.list-table th.sort{cursor:pointer;user-select:none}
+.list-table th.sort:hover{color:var(--primary)}
+.list-table td{padding:11px 12px;border-bottom:1px solid #eee;vertical-align:middle}
+.list-table tr:hover td{background:#f5f7ff}
+.list-table tr.selected td{background:#eef2fb}
+.list-table td .row-actions{display:none;gap:4px}
+.list-table tr:hover td .row-actions{display:flex;gap:4px}
+.list-table td .name-link{color:var(--primary);font-weight:600;cursor:pointer;text-decoration:none}
+.list-table td .name-link:hover{text-decoration:underline}
+.list-table td .name-link:hover ~ .row-actions,
+.list-table tr:hover .row-actions{display:flex}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.tag-open{background:#e3f2fd;color:#1565c0}
+.tag-won{background:#e8f5e9;color:#2e7d32}
+.tag-lost{background:#ffebee;color:#c62828}
+.tag-new{background:#fff8e1;color:#f57c00}
+.tag-active{background:#e8f5e9;color:#2e7d32}
+.tag-inactive{background:#f5f5f5;color:#757575}
+.tag-qualified{background:#e1f5fe;color:#0277bd}
+.tag-prospect{background:#fce4ec;color:#c62828}
+.tag-closed{background:#f3e5f5;color:#7b1fa2}
+.tag-followup{background:#e8f5e9;color:#2e7d32}
+.tag-site{background:#fff3e0;color:#e65100}
+.tag-rooftop{background:#e0f7fa;color:#00838f}
+.tag-ground{background:#f1f8e9;color:#558b2f}
+.tag-residential{background:#fce4ec;color:#ad1457}
+.tag-commercial{background:#e8eaf6;color:#3949ab}
+.tag-industrial{background:#fff8e1;color:#ff8f00}
+
+/* PAGINATION */
+.pagination-wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:var(--white);border-top:1px solid var(--border)}
+.pagination-info{color:var(--text-light);font-size:12px}
+.pagination{Display:flex;gap:4px}
+.pagination button{padding:5px 10px;border:1px solid var(--border);background:var(--white);border-radius:3px;transition:all 0.15s}
+.pagination button:hover{background:var(--bg)}
+.pagination button.active{background:var(--primary);color:var(--white);border-color:var(--primary)}
+.pagination button:disabled{opacity:0.4;cursor:not-allowed}
+
+/* DETAIL VIEW */
+.detail-pane{display:none;flex-direction:column;background:var(--white);width:480px;border-left:1px solid var(--border);overflow:hidden;flex-shrink:0}
+.detail-pane.open{display:flex}
+.detail-pane-header{background:var(--primary);color:var(--white);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.detail-pane-header h2{font-size:15px;flex:1}
+.detail-pane-header button{background:transparent;color:var(--white);padding:4px 8px;border-radius:3px}
+.detail-pane-header button:hover{background:rgba(255,255,255,0.15)}
+.detail-pane-body{flex:1;overflow-y:auto;padding:16px}
+.detail-section{margin-bottom:20px}
+.detail-section h3{font-size:13px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.detail-field{margin-bottom:10px}
+.detail-field label{font-size:11px;font-weight:600;color:var(--text-light);text-transform:uppercase;display:block;margin-bottom:3px}
+.detail-field .value{font-size:13px;color:var(--text)}
+.detail-field .value.email-link{color:var(--primary);cursor:pointer}
+.detail-field .value.email-link:hover{text-decoration:underline}
+.detail-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 16px;gap:0}
+.detail-tab{padding:10px 14px;font-size:12px;font-weight:600;color:var(--text-light);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s}
+.detail-tab:hover{color:var(--text)}
+.detail-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.detail-tab-content{padding:12px 16px;display:none}
+.detail-tab-content.active{display:block}
+.activity-item{padding:10px 0;border-bottom:1px solid #eee;display:flex;gap:10px}
+.activity-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.activity-icon.call{background:#e3f2fd;color:#1565c0}
+.activity-icon.email{background:#fff3e0;color:#e65100}
+.activity-icon.meeting{background:#e8f5e9;color:#2e7d32}
+.activity-icon.task{background:#fce4ec;color:#c62828}
+.activity-icon.note{background:#f5f5f5;color:#757575}
+.activity-content{flex:1}
+.activity-content .title{font-weight:600;font-size:13px}
+.activity-content .desc{font-size:12px;color:var(--text-light);margin-top:2px}
+.activity-content .time{font-size:11px;color:#999;margin-top:2px}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.4);z-index:200;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:6px;width:95%;max-width:680px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.modal.modal-lg{max-width:900px}
+.modal-header{background:var(--primary);color:var(--white);padding:14px 18px;display:flex;align-items:center;gap:10px;border-radius:6px 6px 0 0}
+.modal-header h2{font-size:16px;flex:1}
+.modal-header button{background:transparent;color:var(--white);padding:4px 8px;border-radius:3px;font-size:16px;line-height:1}
+.modal-header button:hover{background:rgba(255,255,255,0.15)}
+.modal-body{flex:1;overflow-y:auto;padding:18px}
+.modal-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:12px}
+.form-group.full{grid-column:1/-1}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px}
+.form-group label span{color:var(--danger)}
+.form-group input,.form-group select,.form-group textarea{width:100%}
+.form-row{display:flex;gap:10px;align-items:flex-end}
+.form-row .form-group{flex:1}
+.related-list{margin-top:10px}
+.related-list-header{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.related-list-header h4{font-size:13px;font-weight:700;color:var(--primary)}
+.related-item{padding:8px 0;border-bottom:1px solid #eee;display:flex;align-items:center;gap:8px}
+.related-item .name{color:var(--primary);font-weight:600;cursor:pointer;font-size:13px}
+.related-item .name:hover{text-decoration:underline}
+.related-item .meta{font-size:11px;color:var(--text-light)}
+.related-item .remove-btn{color:#999;cursor:pointer;margin-left:auto;background:none;border:none;font-size:14px}
+.related-item .remove-btn:hover{color:var(--danger)}
+
+/* DASHBOARD */
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:16px;overflow-y:auto;flex:1}
+.dash-card{background:var(--white);border-radius:6px;border:1px solid var(--border);overflow:hidden}
+.dash-card-header{padding:12px 16px;background:var(--primary);color:var(--white);display:flex;align-items:center;justify-content:space-between}
+.dash-card-header h3{font-size:13px;font-weight:700}
+.dash-card-header .icon{opacity:0.7}
+.dash-card-body{padding:16px}
+.stat-big{font-size:32px;font-weight:700;color:var(--primary);text-align:center;padding:10px 0}
+.stat-label{font-size:11px;color:var(--text-light);text-align:center;text-transform:uppercase;letter-spacing:0.5px}
+.stat-change{font-size:11px;text-align:center;margin-top:4px}
+.stat-change.up{color:var(--success)}
+.stat-change.down{color:var(--danger)}
+.dash-card-body canvas{max-width:100%}
+.mini-chart{height:60px;display:flex;align-items:flex-end;gap:2px;padding:8px 0}
+.mini-chart .bar{flex:1;background:var(--primary);opacity:0.4;border-radius:2px 2px 0 0;transition:opacity 0.2s}
+.mini-chart .bar:hover{opacity:0.8}
+.mini-chart .bar.highlight{background:var(--accent);opacity:1}
+.dash-list{padding:0}
+.dash-list-item{display:flex;align-items:center;padding:8px 0;border-bottom:1px solid #eee;gap:8px}
+.dash-list-item:last-child{border-bottom:none}
+.dash-list-item .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dash-list-item .label{flex:1;font-size:12px}
+.dash-list-item .value{font-weight:700;font-size:12px}
+
+/* REPORTS */
+.report-filters{background:var(--white);padding:12px 20px;border-bottom:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.report-filters select,.report-filters input{width:auto;padding:6px 10px}
+.report-chart-area{padding:20px;overflow:auto;flex:1}
+.report-chart-area canvas{max-width:100%}
+
+/* SETTINGS */
+.settings-container{padding:20px;overflow-y:auto;flex:1;max-width:900px}
+.settings-section{background:var(--white);border-radius:6px;border:1px solid var(--border);margin-bottom:16px;overflow:hidden}
+.settings-section-header{padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;cursor:pointer}
+.settings-section-header h3{font-size:14px;font-weight:700;color:var(--primary);flex:1}
+.settings-section-header .toggle{font-size:16px;color:var(--text-light);transition:transform 0.2s}
+.settings-section.open .toggle{transform:rotate(90deg)}
+.settings-section-body{padding:18px;display:none}
+.settings-section.open .settings-section-body{display:block}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
+.setting-row:last-child{border-bottom:none}
+.setting-info .setting-name{font-weight:600;font-size:13px}
+.setting-info .setting-desc{font-size:11px;color:var(--text-light);margin-top:2px}
+.toggle-switch{width:40px;height:22px;background:#ccc;border-radius:11px;cursor:pointer;position:relative;transition:background 0.2s}
+.toggle-switch.active{background:var(--success)}
+.toggle-switch::after{content:'';width:18px;height:18px;background:var(--white);border-radius:50%;position:absolute;top:2px;left:2px;transition:left 0.2s}
+.toggle-switch.active::after{left:20px}
+.radio-group{display:flex;gap:12px}
+.radio-opt{display:flex;align-items:center;gap:5px;cursor:pointer;font-size:13px}
+.radio-opt input{width:auto}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column;gap:8px}
+.toast{padding:10px 16px;background:var(--primary);color:var(--white);border-radius:4px;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,0.2);animation:slideIn 0.3s ease;display:flex;align-items:center;gap:8px}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--danger)}
+.toast.warning{background:var(--warning)}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast-close{background:none;border:none;color:var(--white);font-size:16px;cursor:pointer;padding:0;line-height:1}
+
+/* CONTEXT MENU */
+.ctx-menu{display:none;position:fixed;background:var(--white);border:1px solid var(--border);border-radius:4px;box-shadow:0 4px 16px rgba(0,0,0,0.15);z-index:300;min-width:160px;padding:4px 0}
+.ctx-menu.open{display:block}
+.ctx-menu-item{padding:8px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 0.1s}
+.ctx-menu-item:hover{background:var(--bg)}
+.ctx-menu-item.danger{color:var(--danger)}
+.ctx-menu-separator{height:1px;background:var(--border);margin:4px 0}
+
+/* TABS */
+.module-tabs{display:flex;background:var(--white);border-bottom:1px solid var(--border);padding:0 20px}
+.module-tab{padding:12px 16px;font-size:13px;font-weight:600;color:var(--text-light);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;display:flex;align-items:center;gap:6px}
+.module-tab:hover{color:var(--text)}
+.module-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.module-tab .count{background:var(--bg);padding:2px 6px;border-radius:8px;font-size:11px}
+.module-tab.active .count{background:var(--primary);color:var(--white)}
+.tab-content{flex:1;overflow:hidden;display:none;flex-direction:column}
+.tab-content.active{display:flex}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#aaa}
+
+/* EMPTY STATE */
+.empty-state{padding:60px 20px;text-align:center;color:var(--text-light)}
+.empty-state svg{width:64px;height:64px;opacity:0.3;margin-bottom:16px}
+.empty-state h3{font-size:16px;color:var(--text);margin-bottom:6px}
+.empty-state p{font-size:13px}
+
+/* HELPERS */
+.text-primary{color:var(--primary)}
+.text-success{color:var(--success)}
+.text-danger{color:var(--danger)}
+.text-muted{color:var(--text-light)}
+.text-sm{font-size:12px}
+.mt-8{margin-top:8px}
+.mt-16{margin-top:16px}
+.flex-1{flex:1}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">⚡ Zoho <span>CRM</span></div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search leads, contacts, deals..." id="globalSearch" onkeyup="handleGlobalSearch(event)">
+  </div>
+  <div class="topbar-actions">
+    <button onclick="showToast('Notifications: 3 new leads today','info')"><span>🔔</span> <span class="badge">3</span></button>
+    <button onclick="showToast('Tasks sync complete','success')"><span>✅</span></button>
+    <button onclick="switchModule('Dashboards')"><span>📊</span></button>
+  </div>
+  <div class="user-menu" onclick="toggleUserMenu()">
+    <div class="user-avatar">JM</div>
+    <span style="color:#fff;font-size:13px">Jamie Mitchell</span>
+    <span style="color:rgba(255,255,255,0.6)">▼</span>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Core Modules</div>
+    <div class="sidebar-item active" data-module="Leads" onclick="switchModule('Leads')">
+      <div class="icon" style="background:#fff3e0;color:#e65100">👤</div><span>Leads</span><span class="count" id="count-Leads">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Contacts" onclick="switchModule('Contacts')">
+      <div class="icon" style="background:#e3f2fd;color:#1565c0">👥</div><span>Contacts</span><span class="count" id="count-Contacts">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Accounts" onclick="switchModule('Accounts')">
+      <div class="icon" style="background:#f3e5f5;color:#7b1fa2">🏢</div><span>Accounts</span><span class="count" id="count-Accounts">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Deals" onclick="switchModule('Deals')">
+      <div class="icon" style="background:#e8f5e9;color:#2e7d32">💰</div><span>Deals</span><span class="count" id="count-Deals">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Activities" onclick="switchModule('Activities')">
+      <div class="icon" style="background:#fff8e1;color:#f57c00">📅</div><span>Activities</span><span class="count" id="count-Activities">0</span>
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Sales & Marketing</div>
+    <div class="sidebar-item" data-module="Campaigns" onclick="switchModule('Campaigns')">
+      <div class="icon" style="background:#fce4ec;color:#c62828">📣</div><span>Campaigns</span><span class="count" id="count-Campaigns">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Products" onclick="switchModule('Products')">
+      <div class="icon" style="background:#e0f7fa;color:#00838f">📦</div><span>Products</span><span class="count" id="count-Products">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Quotes" onclick="switchModule('Quotes')">
+      <div class="icon" style="background:#e8eaf6;color:#3949ab">📝</div><span>Quotes</span><span class="count" id="count-Quotes">0</span>
+    </div>
+    <div class="sidebar-item" data-module="SalesOrders" onclick="switchModule('SalesOrders')">
+      <div class="icon" style="background:#f1f8e9;color:#558b2f">🧾</div><span>Sales Orders</span><span class="count" id="count-SalesOrders">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Invoices" onclick="switchModule('Invoices')">
+      <div class="icon" style="background:#fff3e0;color:#e65100">💳</div><span>Invoices</span><span class="count" id="count-Invoices">0</span>
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Service & Support</div>
+    <div class="sidebar-item" data-module="Cases" onclick="switchModule('Cases')">
+      <div class="icon" style="background:#ffebee;color:#c62828">🎗️</div><span>Cases</span><span class="count" id="count-Cases">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Solutions" onclick="switchModule('Solutions')">
+      <div class="icon" style="background:#e1f5fe;color:#0277bd">💡</div><span>Solutions</span><span class="count" id="count-Solutions">0</span>
+    </div>
+    <div class="sidebar-item" data-module="Vendors" onclick="switchModule('Vendors')">
+      <div class="icon" style="background:#efebe9;color:#795548">🚚</div><span>Vendors</span><span class="count" id="count-Vendors">0</span>
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Insights</div>
+    <div class="sidebar-item" data-module="Dashboards" onclick="switchModule('Dashboards')">
+      <div class="icon" style="background:#e8f5e9;color:#2e7d32">📊</div><span>Dashboards</span>
+    </div>
+    <div class="sidebar-item" data-module="Reports" onclick="switchModule('Reports')">
+      <div class="icon" style="background:#f3e5f5;color:#7b1fa2">📈</div><span>Reports</span>
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">System</div>
+    <div class="sidebar-item" data-module="Settings" onclick="switchModule('Settings')">
+      <div class="icon" style="background:#f5f5f5;color:#757575">⚙️</div><span>Settings</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main" id="mainContent">
+  <!-- Content injected by JS -->
+</div>
+
+<!-- DETAIL PANE -->
+<div class="detail-pane" id="detailPane">
+  <div class="detail-pane-header">
+    <h2 id="detailPaneTitle">Record Details</h2>
+    <button onclick="closeDetail()" title="Close">✕</button>
+  </div>
+  <div class="detail-pane-body" id="detailPaneBody">
+    <!-- Detail content injected by JS -->
+  </div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <h2 id="modalTitle">Modal</h2>
+      <button onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <!-- Form content injected by JS -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modalSaveBtn" onclick="saveModalForm()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT MENU -->
+<div class="ctx-menu" id="ctxMenu">
+  <div class="ctx-menu-item" onclick="ctxEdit()">✏️ Edit</div>
+  <div class="ctx-menu-item" onclick="ctxDelete()">🗑️ Delete</div>
+  <div class="ctx-menu-separator"></div>
+  <div class="ctx-menu-item" onclick="ctxClone()">📋 Duplicate</div>
+  <div class="ctx-menu-item" onclick="ctxEmail()">📧 Send Email</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ============ DATA STORE ============
+const STORAGE_KEY = 'zoho_crm_solar';
+let store = {};
+let currentModule = 'Leads';
+let currentRecord = null;
+let currentCtxRecord = null;
+let editMode = false;
+let modalSaveCallback = null;
+let ctxMenuModule = null;
+let ctxMenuRecord = null;
+
+// ============ MODULE DEFINITIONS ============
+const MODULES = {
+  Leads: {
+    singular: 'Lead', plural: 'Leads', color: '#e65100',
+    fields: ['firstName','lastName','company','email','phone','mobile','designation','industry','leadSource','leadStatus','rating','street','city','state','zipCode','country','description','annualRevenue','numberOfEmployees'],
+    labels: { firstName:'First Name', lastName:'Last Name', company:'Company', email:'Email', phone:'Phone', mobile:'Mobile', designation:'Designation', industry:'Industry', leadSource:'Lead Source', leadStatus:'Status', rating:'Rating', street:'Street', city:'City', state:'State', zipCode:'Zip Code', country:'Country', description:'Description', annualRevenue:'Annual Revenue', numberOfEmployees:'Employees' },
+    types: { firstName:'text', lastName:'text', company:'text', email:'email', phone:'text', mobile:'text', designation:'text', industry:'select', leadSource:'select', leadStatus:'select', rating:'select', street:'text', city:'text', state:'text', zipCode:'text', country:'text', description:'textarea', annualRevenue:'currency', numberOfEmployees:'number' },
+    selects: {
+      industry:['Solar Energy','Renewable Energy','Electrical','Construction','Real Estate','Manufacturing','Retail','Technology','Healthcare','Finance','Other'],
+      leadSource:['Web','Referral','Cold Call','Trade Show','Partner','Advertisement','Employee Referral','Other'],
+      leadStatus:['New','Contacted','Qualified','Proposal Sent','Negotiation','Closed Won','Closed Lost'],
+      rating:['Hot','Warm','Cold']
+    },
+    columns: ['firstName','company','email','phone','leadStatus','rating','leadSource'],
+    listLabels: { firstName:'Name', company:'Company', email:'Email', phone:'Phone', leadStatus:'Status', rating:'Rating', leadSource:'Source' }
+  },
+  Contacts: {
+    singular: 'Contact', plural: 'Contacts', color: '#1565c0',
+    fields: ['firstName','lastName','accountId','email','phone','mobile','title','department','mailingStreet','mailingCity','mailingState','mailingZip','mailingCountry','description'],
+    labels: { firstName:'First Name', lastName:'Last Name', accountId:'Account', email:'Email', phone:'Phone', mobile:'Mobile', title:'Title', department:'Department', mailingStreet:'Street', mailingCity:'City', mailingState:'State', mailingZip:'Zip', mailingCountry:'Country', description:'Description' },
+    types: { firstName:'text', lastName:'text', accountId:'lookup', email:'email', phone:'text', mobile:'text', title:'text', department:'text', mailingStreet:'text', mailingCity:'text', mailingState:'text', mailingZip:'text', mailingCountry:'text', description:'textarea' },
+    columns: ['firstName','accountId','email','phone','title','department'],
+    listLabels: { firstName:'Name', accountId:'Account', email:'Email', phone:'Phone', title:'Title', department:'Department' }
+  },
+  Accounts: {
+    singular: 'Account', plural: 'Accounts', color: '#7b1fa2',
+    fields: ['accountName','accountType','industry','website','phone','email','billingStreet','billingCity','billingState','billingZip','billingCountry','description','annualRevenue','employeeCount'],
+    labels: { accountName:'Account Name', accountType:'Type', industry:'Industry', website:'Website', phone:'Phone', email:'Email', billingStreet:'Billing Street', billingCity:'Billing City', billingState:'Billing State', billingZip:'Billing Zip', billingCountry:'Billing Country', description:'Description', annualRevenue:'Annual Revenue', employeeCount:'Employees' },
+    types: { accountName:'text', accountType:'select', industry:'select', website:'url', phone:'text', email:'email', billingStreet:'text', billingCity:'text', billingState:'text', billingZip:'text', billingCountry:'text', description:'textarea', annualRevenue:'currency', employeeCount:'number' },
+    selects: { accountType:['Customer','Prospect','Partner','Competitor','Vendor','Other'], industry:['Solar Energy','Renewable Energy','Electrical','Construction','Real Estate','Manufacturing','Retail','Technology','Healthcare','Finance'] },
+    columns: ['accountName','accountType','industry','phone','email','billingCity'],
+    listLabels: { accountName:'Account Name', accountType:'Type', industry:'Industry', phone:'Phone', email:'Email', billingCity:'City' }
+  },
+  Deals: {
+    singular: 'Deal', plural: 'Deals', color: '#2e7d32',
+    fields: ['dealName','accountId','contactId','stage','amount','probability','closingDate','dealType','leadSource','campaignId','description','nextStep'],
+    labels: { dealName:'Deal Name', accountId:'Account', contactId:'Contact', stage:'Stage', amount:'Amount', probability:'Probability', closingDate:'Expected Close', dealType:'Type', leadSource:'Lead Source', campaignId:'Campaign', description:'Description', nextStep:'Next Step' },
+    types: { dealName:'text', accountId:'lookup', contactId:'lookup', stage:'select', amount:'currency', probability:'number', closingDate:'date', dealType:'select', leadSource:'select', campaignId:'lookup', description:'textarea', nextStep:'text' },
+    selects: { stage:['Qualification','Needs Analysis','Value Proposition','Proposal/Price Quote','Negotiation Review','Closed Won','Closed Lost'], dealType:['New Business','Existing Business','Renewal'], leadSource:['Web','Referral','Cold Call','Trade Show','Partner'] },
+    columns: ['dealName','accountId','stage','amount','closingDate'],
+    listLabels: { dealName:'Deal Name', accountId:'Account', stage:'Stage', amount:'Amount', closingDate:'Close Date' }
+  },
+  Activities: {
+    singular: 'Activity', plural: 'Activities', color: '#f57c00',
+    fields: ['subject','activityType','relatedToModule','relatedToId','dueDate','dueTime','status','priority','assignedTo','description','location','duration'],
+    labels: { subject:'Subject', activityType:'Type', relatedToModule:'Related To Module', relatedToId:'Related To', dueDate:'Due Date', dueTime:'Due Time', status:'Status', priority:'Priority', assignedTo:'Assigned To', description:'Description', location:'Location', duration:'Duration' },
+    types: { subject:'text', activityType:'select', relatedToModule:'select', relatedToId:'lookup', dueDate:'date', dueTime:'time', status:'select', priority:'select', assignedTo:'text', description:'textarea', location:'text', duration:'text' },
+    selects: { activityType:['Call','Meeting','Task','Email'], status:['Not Started','In Progress','Completed','Waiting for Input','Deferred'], priority:['High','Medium','Low'], relatedToModule:['Leads','Contacts','Accounts','Deals'] },
+    columns: ['subject','activityType','dueDate','status','priority'],
+    listLabels: { subject:'Subject', activityType:'Type', dueDate:'Due Date', status:'Status', priority:'Priority' }
+  },
+  Campaigns: {
+    singular: 'Campaign', plural: 'Campaigns', color: '#c62828',
+    fields: ['campaignName','campaignType','status','startDate','endDate','budget','expectedRevenue','actualCost','description','objective','channel'],
+    labels: { campaignName:'Campaign Name', campaignType:'Type', status:'Status', startDate:'Start Date', endDate:'End Date', budget:'Budget', expectedRevenue:'Expected Revenue', actualCost:'Actual Cost', description:'Description', objective:'Objective', channel:'Channel' },
+    types: { campaignName:'text', campaignType:'select', status:'select', startDate:'date', endDate:'date', budget:'currency', expectedRevenue:'currency', actualCost:'currency', description:'textarea', objective:'text', channel:'select' },
+    selects: { campaignType:['Email','Social Media','Event','Webinar','Advertisement','Direct Mail','Telemarketing'], status:['Planning','Active','Completed','On Hold','Cancelled'], channel:['Email','Social','Event','Web','Print'] },
+    columns: ['campaignName','campaignType','status','startDate','budget'],
+    listLabels: { campaignName:'Name', campaignType:'Type', status:'Status', startDate:'Start', budget:'Budget' }
+  },
+  Products: {
+    singular: 'Product', plural: 'Products', color: '#00838f',
+    fields: ['productName','productCode','productCategory','unitPrice','qtyOnHand','qtyOrdered','manufacturer','description','vendorId','productActive'],
+    labels: { productName:'Product Name', productCode:'Product Code', productCategory:'Category', unitPrice:'Unit Price', qtyOnHand:'Qty On Hand', qtyOrdered:'Qty Ordered', manufacturer:'Manufacturer', description:'Description', vendorId:'Vendor', productActive:'Active' },
+    types: { productName:'text', productCode:'text', productCategory:'select', unitPrice:'currency', qtyOnHand:'number', qtyOrdered:'number', manufacturer:'text', description:'textarea', vendorId:'lookup', productActive:'checkbox' },
+    selects: { productCategory:['Solar Panels','Inverters','Mounting Systems','Batteries','Cables & Wiring','Monitoring Systems','Electrical Components','Balance of System'] },
+    columns: ['productName','productCode','productCategory','unitPrice','qtyOnHand'],
+    listLabels: { productName:'Product', productCode:'Code', productCategory:'Category', unitPrice:'Unit Price', qtyOnHand:'Stock' }
+  },
+  Quotes: {
+    singular: 'Quote', plural: 'Quotes', color: '#3949ab',
+    fields: ['quoteNumber','quoteSubject','accountId','contactId','dealId','quoteStage','validUntil','quantity','listPrice','discount','tax','totalAmount','description'],
+    labels: { quoteNumber:'Quote Number', quoteSubject:'Subject', accountId:'Account', contactId:'Contact', dealId:'Deal', quoteStage:'Stage', validUntil:'Valid Until', quantity:'Quantity', listPrice:'List Price', discount:'Discount %', tax:'Tax', totalAmount:'Total', description:'Description' },
+    types: { quoteNumber:'text', quoteSubject:'text', accountId:'lookup', contactId:'lookup', dealId:'lookup', quoteStage:'select', validUntil:'date', quantity:'number', listPrice:'currency', discount:'number', tax:'currency', totalAmount:'currency', description:'textarea' },
+    selects: { quoteStage:['Draft','Presented','Negotiating','Accepted','Rejected','Expired'] },
+    columns: ['quoteNumber','quoteSubject','accountId','quoteStage','totalAmount','validUntil'],
+    listLabels: { quoteNumber:'Quote #', quoteSubject:'Subject', accountId:'Account', quoteStage:'Stage', totalAmount:'Total', validUntil:'Valid Until' }
+  },
+  SalesOrders: {
+    singular: 'Sales Order', plural: 'Sales Orders', color: '#558b2f',
+    fields: ['soNumber','soSubject','accountId','contactId','quoteId','soStage','orderDate','deliveryDate','subTotal','tax','totalAmount','description'],
+    labels: { soNumber:'SO Number', soSubject:'Subject', accountId:'Account', contactId:'Contact', quoteId:'Quote', soStage:'Stage', orderDate:'Order Date', deliveryDate:'Delivery Date', subTotal:'Sub Total', tax:'Tax', totalAmount:'Total', description:'Description' },
+    types: { soNumber:'text', soSubject:'text', accountId:'lookup', contactId:'lookup', quoteId:'lookup', soStage:'select', orderDate:'date', deliveryDate:'date', subTotal:'currency', tax:'currency', totalAmount:'currency', description:'textarea' },
+    selects: { soStage:['Draft','Approved','In Production','Shipped','Delivered','Invoiced','Cancelled'] },
+    columns: ['soNumber','soSubject','accountId','soStage','orderDate','totalAmount'],
+    listLabels: { soNumber:'SO #', soSubject:'Subject', accountId:'Account', soStage:'Stage', orderDate:'Order Date', totalAmount:'Total' }
+  },
+  Invoices: {
+    singular: 'Invoice', plural: 'Invoices', color: '#e65100',
+    fields: ['invoiceNumber','invoiceSubject','accountId','contactId','salesOrderId','invoiceStatus','invoiceDate','dueDate','subTotal','tax','amountDue','amountPaid','description'],
+    labels: { invoiceNumber:'Invoice #', invoiceSubject:'Subject', accountId:'Account', contactId:'Contact', salesOrderId:'Sales Order', invoiceStatus:'Status', invoiceDate:'Invoice Date', dueDate:'Due Date', subTotal:'Sub Total', tax:'Tax', amountDue:'Amount Due', amountPaid:'Amount Paid', description:'Description' },
+    types: { invoiceNumber:'text', invoiceSubject:'text', accountId:'lookup', contactId:'lookup', salesOrderId:'lookup', invoiceStatus:'select', invoiceDate:'date', dueDate:'date', subTotal:'currency', tax:'currency', amountDue:'currency', amountPaid:'currency', description:'textarea' },
+    selects: { invoiceStatus:['Draft','Sent','Viewed','Paid','Overdue','Cancelled','Write-off'] },
+    columns: ['invoiceNumber','invoiceSubject','accountId','invoiceStatus','invoiceDate','amountDue'],
+    listLabels: { invoiceNumber:'Invoice #', invoiceSubject:'Subject', accountId:'Account', invoiceStatus:'Status', invoiceDate:'Date', amountDue:'Amount Due' }
+  },
+  Vendors: {
+    singular: 'Vendor', plural: 'Vendors', color: '#795548',
+    fields: ['vendorName','vendorCode','category','phone','email','website','street','city','state','zipCode','country','description','rating'],
+    labels: { vendorName:'Vendor Name', vendorCode:'Vendor Code', category:'Category', phone:'Phone', email:'Email', website:'Website', street:'Street', city:'City', state:'State', zipCode:'Zip', country:'Country', description:'Description', rating:'Rating' },
+    types: { vendorName:'text', vendorCode:'text', category:'select', phone:'text', email:'email', website:'url', street:'text', city:'text', state:'text', zipCode:'text', country:'text', description:'textarea', rating:'select' },
+    selects: { category:['Solar Panels','Inverters','Batteries','Mounting','Cables','Monitoring','Electrical','Other'], rating:['Excellent','Good','Average','Poor'] },
+    columns: ['vendorName','vendorCode','category','phone','email'],
+    listLabels: { vendorName:'Vendor Name', vendorCode:'Code', category:'Category', phone:'Phone', email:'Email' }
+  },
+  Cases: {
+    singular: 'Case', plural: 'Cases', color: '#c62828',
+    fields: ['caseNumber','subject','accountId','contactId','caseType','status','priority','origin','description','resolution','closedDate'],
+    labels: { caseNumber:'Case #', subject:'Subject', accountId:'Account', contactId:'Contact', caseType:'Type', status:'Status', priority:'Priority', origin:'Origin', description:'Description', resolution:'Resolution', closedDate:'Closed Date' },
+    types: { caseNumber:'text', subject:'text', accountId:'lookup', contactId:'lookup', caseType:'select', status:'select', priority:'select', origin:'select', description:'textarea', resolution:'textarea', closedDate:'date' },
+    selects: { caseType:['Problem','Question','Feature Request','Refund','Installation','Maintenance'], status:['New','Assigned','In Progress','Waiting for Customer','Escalated','Solved','Closed'], priority:['High','Medium','Low'], origin:['Email','Phone','Web','Chat','Social Media'] },
+    columns: ['caseNumber','subject','accountId','caseType','status','priority'],
+    listLabels: { caseNumber:'Case #', subject:'Subject', accountId:'Account', caseType:'Type', status:'Status', priority:'Priority' }
+  },
+  Solutions: {
+    singular: 'Solution', plural: 'Solutions', color: '#0277bd',
+    fields: ['solutionNumber','title','status','category','productId','votes','description','answer'],
+    labels: { solutionNumber:'Solution #', title:'Title', status:'Status', category:'Category', productId:'Product', votes:'Votes', description:'Question', answer:'Answer' },
+    types: { solutionNumber:'text', title:'text', status:'select', category:'select', productId:'lookup', votes:'number', description:'textarea', answer:'textarea' },
+    selects: { status:['Draft','Published','Archived'], category:['Installation','Maintenance','Troubleshooting','Warranty','Technical','General'] },
+    columns: ['solutionNumber','title','status','category','votes'],
+    listLabels: { solutionNumber:'#', title:'Title', status:'Status', category:'Category', votes:'Votes' }
+  },
+  Dashboards: { isSpecial: true },
+  Reports: { isSpecial: true },
+  Settings: { isSpecial: true }
+};
+
+// ============ SAMPLE DATA ============
+function getSampleData() {
+  const now = new Date();
+  const d = (days) => { const dt = new Date(now); dt.setDate(dt.getDate() + days); return dt.toISOString().split('T')[0]; };
+  return {
+    Leads: [
+      { id:'L001', firstName:'Sarah', lastName:'Chen', company:'SolarTech Solutions', email:'sarah.chen@solartech.com', phone:'+1-415-555-0101', mobile:'+1-415-555-0102', designation:'VP Operations', industry:'Solar Energy', leadSource:'Web', leadStatus:'Qualified', rating:'Hot', street:'1200 Solar Way', city:'San Francisco', state:'CA', zipCode:'94105', country:'USA', description:'Interested in commercial solar installations for their 5 facilities across California.', annualRevenue:'$2,500,000', numberOfEmployees:'45', createdAt:now.toISOString() },
+      { id:'L002', firstName:'Marcus', lastName:'Williams', company:'GreenBuild Construction', email:'marcus.w@greenbuild.com', phone:'+1-512-555-0203', mobile:'+1-512-555-0204', designation:'Project Manager', industry:'Construction', leadSource:'Referral', leadStatus:'Contacted', rating:'Warm', street:'8800 Builder Blvd', city:'Austin', state:'TX', zipCode:'78701', country:'USA', description:'Building contractor looking to add solar installation to service offerings.', annualRevenue:'$5,000,000', numberOfEmployees:'120', createdAt:now.toISOString() },
+      { id:'L003', firstName:'Jennifer', lastName:'Park', company:'SunPower Homes', email:'jpark@sunpowerhomes.com', phone:'+1-858-555-0305', mobile:'+1-858-555-0306', designation:'CEO', industry:'Solar Energy', leadSource:'Trade Show', leadStatus:'Proposal Sent', rating:'Hot', street:'3500 Pacific Heights Rd', city:'San Diego', state:'CA', zipCode:'92101', country:'USA', description:'Leading residential solar developer seeking panel suppliers for Q3 projects.', annualRevenue:'$12,000,000', numberOfEmployees:'85', createdAt:now.toISOString() },
+      { id:'L004', firstName:'Robert', lastName:'Martinez', company:'EcoVolt Industries', email:'r.martinez@ecovolt.com', phone:'+1-303-555-0407', mobile:'+1-303-555-0408', designation:'Director of Procurement', industry:'Manufacturing', leadSource:'Cold Call', leadStatus:'New', rating:'Cold', street:'6700 Industrial Pkwy', city:'Denver', state:'CO', zipCode:'80202', country:'USA', description:'Large manufacturing facility exploring solar PPA options for 200,000 sq ft roof space.', annualRevenue:'$25,000,000', numberOfEmployees:'340', createdAt:now.toISOString() },
+      { id:'L005', firstName:'Amanda', lastName:'Foster', company:'ClearSkies Energy', email:'a.foster@clearskies.com', phone:'+1-206-555-0509', mobile:'+1-206-555-0510', designation:'Business Development', industry:'Renewable Energy', leadSource:'Partner', leadStatus:'Contacted', rating:'Warm', street:'2100 Pike St', city:'Seattle', state:'WA', zipCode:'98101', country:'USA', description:'Partner referral - looking for residential solar leads in Pacific Northwest.', annualRevenue:'$3,200,000', numberOfEmployees:'28', createdAt:now.toISOString() },
+      { id:'L006', firstName:'David', lastName:'Thompson', company:'Thompson Farms', email:'david@thompsonfarms.com', phone:'+1-615-555-0611', mobile:'+1-615-555-0612', designation:'Owner', industry:'Agriculture', leadSource:'Web', leadStatus:'New', rating:'Warm', street:'15000 Farm Road', city:'Nashville', state:'TN', zipCode:'37201', country:'USA', description:'Agricultural property owner interested in ground-mount solar for farm operations.', annualRevenue:'$800,000', numberOfEmployees:'12', createdAt:now.toISOString() },
+      { id:'L007', firstName:'Lisa', lastName:'Wong', company:'Nexus Buildings Inc', email:'lisa.wong@nexusbuildings.com', phone:'+1-312-555-0713', mobile:'+1-312-555-0714', designation:'Sustainability Director', industry:'Real Estate', leadSource:'Advertisement', leadStatus:'Qualified', rating:'Hot', street:'500 N Michigan Ave', city:'Chicago', state:'IL', zipCode:'60611', country:'USA', description:'Commercial real estate firm planning solar retrofits on 12 office buildings.', annualRevenue:'$50,000,000', numberOfEmployees:'200', createdAt:now.toISOString() },
+      { id:'L008', firstName:'James', lastName:'O\'Brien', company:'OBrien Solar', email:'jobs@obriensolar.com', phone:'+1-617-555-0815', mobile:'+1-617-555-0816', designation:'Founder', industry:'Solar Energy', leadSource:'Employee Referral', leadStatus:'Negotiation', rating:'Hot', street:'88 Beacon St', city:'Boston', state:'MA', zipCode:'02108', country:'USA', description:'Experienced solar installer looking to join our installer network program.', annualRevenue:'$1,200,000', numberOfEmployees:'18', createdAt:now.toISOString() },
+    ],
+    Contacts: [
+      { id:'C001', firstName:'Sarah', lastName:'Chen', accountId:'A001', email:'sarah.chen@solartech.com', phone:'+1-415-555-0101', mobile:'+1-415-555-0102', title:'VP Operations', department:'Operations', mailingStreet:'1200 Solar Way', mailingCity:'San Francisco', mailingState:'CA', mailingZip:'94105', mailingCountry:'USA', description:'Key decision maker for solar projects.' },
+      { id:'C002', firstName:'Marcus', lastName:'Williams', accountId:'A002', email:'marcus.w@greenbuild.com', phone:'+1-512-555-0203', mobile:'+1-512-555-0204', title:'Project Manager', department:'Construction', mailingStreet:'8800 Builder Blvd', mailingCity:'Austin', mailingState:'TX', mailingZip:'78701', mailingCountry:'USA', description:'Manages construction projects including solar installs.' },
+      { id:'C003', firstName:'Jennifer', lastName:'Park', accountId:'A003', email:'jpark@sunpowerhomes.com', phone:'+1-858-555-0305', mobile:'+1-858-555-0306', title:'CEO', department:'Executive', mailingStreet:'3500 Pacific Heights Rd', mailingCity:'San Diego', mailingState:'CA', mailingZip:'92101', mailingCountry:'USA', description:'Final decision authority for all purchases.' },
+      { id:'C004', firstName:'Robert', lastName:'Martinez', accountId:'A004', email:'r.martinez@ecovolt.com', phone:'+1-303-555-0407', mobile:'+1-303-555-0408', title:'Director of Procurement', department:'Procurement', mailingStreet:'6700 Industrial Pkwy', mailingCity:'Denver', mailingState:'CO', mailingZip:'80202', mailingCountry:'USA', description:'Controls procurement budget for facility improvements.' },
+      { id:'C005', firstName:'Amanda', lastName:'Foster', accountId:'A005', email:'a.foster@clearskies.com', phone:'+1-206-555-0509', mobile:'+1-206-555-0510', title:'Business Development', department:'Sales', mailingStreet:'2100 Pike St', mailingCity:'Seattle', mailingState:'WA', mailingZip:'98101', mailingCountry:'USA', description:'Growing residential solar business in PNW.' },
+      { id:'C006', firstName:'Lisa', lastName:'Wong', accountId:'A006', email:'lisa.wong@nexusbuildings.com', phone:'+1-312-555-0713', mobile:'+1-312-555-0714', title:'Sustainability Director', department:'Facilities', mailingStreet:'500 N Michigan Ave', mailingCity:'Chicago', mailingState:'IL', mailingZip:'60611', mailingCountry:'USA', description:'Leads sustainability initiatives for 12 commercial buildings.' },
+      { id:'C007', firstName:'James', lastName:'O\'Brien', accountId:'A007', email:'jobs@obriensolar.com', phone:'+1-617-555-0815', mobile:'+1-617-555-0816', title:'Founder', department:'Executive', mailingStreet:'88 Beacon St', mailingCity:'Boston', mailingState:'MA', mailingZip:'02108', mailingCountry:'USA', description:'Solar installer seeking partnership opportunities.' },
+      { id:'C008', firstName:'Karen', lastName:'Nguyen', accountId:'A001', email:'k.nguyen@solartech.com', phone:'+1-415-555-0150', mobile:'+1-415-555-0151', title:'Solar Engineer', department:'Engineering', mailingStreet:'1200 Solar Way', mailingCity:'San Francisco', mailingState:'CA', mailingZip:'94105', mailingCountry:'USA', description:'Technical lead for solar installation designs.' },
+    ],
+    Accounts: [
+      { id:'A001', accountName:'SolarTech Solutions', accountType:'Customer', industry:'Solar Energy', website:'https://solartech.com', phone:'+1-415-555-0100', email:'info@solartech.com', billingStreet:'1200 Solar Way', billingCity:'San Francisco', billingState:'CA', billingZip:'94105', billingCountry:'USA', description:'Commercial solar installation company serving California.', annualRevenue:'$2,500,000', employeeCount:'45' },
+      { id:'A002', accountName:'GreenBuild Construction', accountType:'Customer', industry:'Construction', website:'https://greenbuild.com', phone:'+1-512-555-0200', email:'contact@greenbuild.com', billingStreet:'8800 Builder Blvd', billingCity:'Austin', billingState:'TX', billingZip:'78701', billingCountry:'USA', description:'General contractor expanding into solar installations.', annualRevenue:'$5,000,000', employeeCount:'120' },
+      { id:'A003', accountName:'SunPower Homes', accountType:'Customer', industry:'Solar Energy', website:'https://sunpowerhomes.com', phone:'+1-858-555-0300', email:'info@sunpowerhomes.com', billingStreet:'3500 Pacific Heights Rd', billingCity:'San Diego', billingState:'CA', billingZip:'92101', billingCountry:'USA', description:'Leading residential solar developer.', annualRevenue:'$12,000,000', employeeCount:'85' },
+      { id:'A004', accountName:'EcoVolt Industries', accountType:'Prospect', industry:'Manufacturing', website:'https://ecovolt.com', phone:'+1-303-555-0400', email:'facilities@ecovolt.com', billingStreet:'6700 Industrial Pkwy', billingCity:'Denver', billingState:'CO', billingZip:'80202', billingCountry:'USA', description:'Large manufacturer exploring solar PPA options.', annualRevenue:'$25,000,000', employeeCount:'340' },
+      { id:'A005', accountName:'ClearSkies Energy', accountType:'Customer', industry:'Renewable Energy', website:'https://clearskies.com', phone:'+1-206-555-0500', email:'info@clearskies.com', billingStreet:'2100 Pike St', billingCity:'Seattle', billingState:'WA', billingZip:'98101', billingCountry:'USA', description:'Residential solar installer in Pacific Northwest.', annualRevenue:'$3,200,000', employeeCount:'28' },
+      { id:'A006', accountName:'Nexus Buildings Inc', accountType:'Prospect', industry:'Real Estate', website:'https://nexusbuildings.com', phone:'+1-312-555-0700', email:'sustainability@nexusbuildings.com', billingStreet:'500 N Michigan Ave', billingCity:'Chicago', billingState:'IL', billingZip:'60611', billingCountry:'USA', description:'Commercial real estate with 12 office buildings for solar retrofit.', annualRevenue:'$50,000,000', employeeCount:'200' },
+      { id:'A007', accountName:'OBrien Solar', accountType:'Partner', industry:'Solar Energy', website:'https://obriensolar.com', phone:'+1-617-555-0800', email:'jobs@obriensolar.com', billingStreet:'88 Beacon St', billingCity:'Boston', billingState:'MA', billingZip:'02108', billingCountry:'USA', description:'Established solar installer in New England seeking partnerships.', annualRevenue:'$1,200,000', employeeCount:'18' },
+      { id:'A008', accountName:'Thompson Farms', accountType:'Customer', industry:'Agriculture', website:'https://thompsonfarms.com', phone:'+1-615-555-0600', email:'david@thompsonfarms.com', billingStreet:'15000 Farm Road', billingCity:'Nashville', billingState:'TN', billingZip:'37201', billingCountry:'USA', description:'Agricultural property with ground-mount solar project planned.', annualRevenue:'$800,000', employeeCount:'12' },
+    ],
+    Deals: [
+      { id:'D001', dealName:'SolarTech - 5 Site Commercial Project', accountId:'A001', contactId:'C001', stage:'Proposal Sent', amount:'$485,000', probability:'60', closingDate:d(30), dealType:'New Business', leadSource:'Web', campaignId:'', description:'Installation of 500kW solar systems across 5 commercial facilities.', nextStep:'Follow up on proposal by Friday' },
+      { id:'D002', dealName:'GreenBuild Partnership Agreement', accountId:'A002', contactId:'C002', stage:'Negotiation Review', amount:'$150,000', probability:'75', closingDate:d(15), dealType:'New Business', leadSource:'Referral', campaignId:'', description:'Installer partnership - training and certification program.', nextStep:'Contract review meeting next Tuesday' },
+      { id:'D003', dealName:'SunPower Q3 Panel Supply', accountId:'A003', contactId:'C003', stage:'Qualification', amount:'$220,000', probability:'40', closingDate:d(45), dealType:'New Business', leadSource:'Trade Show', campaignId:'', description:'Supply of 1000 REC Alpha panels for residential projects.', nextStep:'Send product specifications' },
+      { id:'D004', dealName:'EcoVolt Manufacturing Facility PPA', accountId:'A004', contactId:'C004', stage:'Needs Analysis', amount:'$890,000', probability:'30', closingDate:d(90), dealType:'New Business', leadSource:'Cold Call', campaignId:'', description:'200,000 sq ft rooftop PPA - 1.2MW system.', nextStep:'Site assessment scheduled for next week' },
+      { id:'D005', dealName:'ClearSkies PNW Expansion', accountId:'A005', contactId:'C005', stage:'Value Proposition', amount:'$95,000', probability:'55', closingDate:d(25), dealType:'New Business', leadSource:'Partner', campaignId:'', description:'Residential inventory stocking order for Seattle market.', nextStep:'Product demo with sales team' },
+      { id:'D006', dealName:'Nexus Buildings Retrofit', accountId:'A006', contactId:'C006', stage:'Proposal Sent', amount:'$1,200,000', probability:'50', closingDate:d(60), dealType:'New Business', leadSource:'Advertisement', campaignId:'', description:'Solar installation across 12 commercial buildings.', nextStep:'Waiting for board approval' },
+      { id:'D007', dealName:'OBrien Installer Network', accountId:'A007', contactId:'C007', stage:'Closed Won', amount:'$45,000', probability:'100', closingDate:d(-5), dealType:'New Business', leadSource:'Employee Referral', campaignId:'', description:'Installer network membership - annual fee.', nextStep:'Onboarding scheduled' },
+      { id:'D008', dealName:'Thompson Farm Ground Mount', accountId:'A008', contactId:'', stage:'Closed Won', amount:'$68,000', probability:'100', closingDate:d(-10), dealType:'New Business', leadSource:'Web', campaignId:'', description:'50kW ground-mount system for farm operations.', nextStep:'Installation complete, awaiting inspection' },
+    ],
+    Activities: [
+      { id:'ACT001', subject:'Follow up on SolarTech proposal', activityType:'Task', relatedToModule:'Deals', relatedToId:'D001', dueDate:d(2), dueTime:'10:00 AM', status:'Not Started', priority:'High', assignedTo:'Jamie Mitchell', description:'Review proposal details and answer technical questions.', location:'', duration:'30 min' },
+      { id:'ACT002', subject:'Site assessment - EcoVolt facility', activityType:'Meeting', relatedToModule:'Deals', relatedToId:'D004', dueDate:d(7), dueTime:'9:00 AM', status:'Not Started', priority:'High', assignedTo:'Jamie Mitchell', description:'Initial site visit to evaluate roof condition and electrical infrastructure.', location:'6700 Industrial Pkwy, Denver, CO', duration:'2 hours' },
+      { id:'ACT003', subject:'Call with Jennifer Park - panel specs', activityType:'Call', relatedToModule:'Deals', relatedToId:'D003', dueDate:d(1), dueTime:'3:00 PM', status:'In Progress', priority:'Medium', assignedTo:'Jamie Mitchell', description:'Discuss REC Alpha panel specifications and delivery timeline.', location:'', duration:'45 min' },
+      { id:'ACT004', subject:'GreenBuild contract review', activityType:'Task', relatedToModule:'Deals', relatedToId:'D002', dueDate:d(3), dueTime:'11:00 AM', status:'Waiting for Input', priority:'High', assignedTo:'Jamie Mitchell', description:'Review contract terms with legal team before signing.', location:'', duration:'1 hour' },
+      { id:'ACT005', subject:'Nexus Buildings presentation', activityType:'Meeting', relatedToModule:'Deals', relatedToId:'D006', dueDate:d(14), dueTime:'2:00 PM', status:'Not Started', priority:'High', assignedTo:'Jamie Mitchell', description:'Present solar proposal to Nexus Buildings board.', location:'500 N Michigan Ave, Chicago, IL', duration:'1 hour' },
+      { id:'ACT006', subject:'Email: New product catalog', activityType:'Email', relatedToModule:'Contacts', relatedToId:'C001', dueDate:d(0), dueTime:'', status:'Completed', priority:'Low', assignedTo:'Jamie Mitchell', description:'Sent updated solar panel catalog to SolarTech team.', location:'', duration:'' },
+      { id:'ACT007', subject:'ClearSkies product demo', activityType:'Meeting', relatedToModule:'Deals', relatedToId:'D005', dueDate:d(5), dueTime:'1:00 PM', status:'In Progress', priority:'Medium', assignedTo:'Jamie Mitchell', description:'Live product demonstration for ClearSkies sales team.', location:'2100 Pike St, Seattle, WA', duration:'2 hours' },
+      { id:'ACT008', subject:'Thompson Farm installation check', activityType:'Task', relatedToModule:'Deals', relatedToId:'D008', dueDate:d(-1), dueTime:'9:00 AM', status:'Completed', priority:'High', assignedTo:'Jamie Mitchell', description:'Post-installation inspection completed successfully.', location:'15000 Farm Road, Nashville, TN', duration:'1 hour' },
+    ],
+    Campaigns: [
+      { id:'CAM001', campaignName:'Spring Solar Expo 2026', campaignType:'Event', status:'Completed', startDate:d(-30), endDate:d(-28), budget:'$25,000', expectedRevenue:'$150,000', actualCost:'$22,000', description:'Annual solar trade show - generated 45 qualified leads.', objective:'Generate leads and showcase new products', channel:'Event' },
+      { id:'CAM002', campaignName:'Commercial Solar Email Blast', campaignType:'Email', status:'Active', startDate:d(-7), endDate:d(7), budget:'$3,000', expectedRevenue:'$80,000', actualCost:'$2,500', description:'Targeted email campaign to commercial prospects in California and Texas.', objective:'Generate commercial solar leads', channel:'Email' },
+      { id:'CAM003', campaignName:'Residential Solar Webinar Series', campaignType:'Webinar', status:'Active', startDate:d(-14), endDate:d(14), budget:'$5,000', expectedRevenue:'$40,000', actualCost:'$4,200', description:'Weekly webinars on residential solar benefits and financing.', objective:'Educate homeowners, generate leads', channel:'Web' },
+      { id:'CAM004', campaignName:'Partner Referral Program', campaignType:'Direct Mail', status:'Active', startDate:d(-60), endDate:d(30), budget:'$8,000', expectedRevenue:'$100,000', actualCost:'$6,000', description:'Referral incentive program for installer partners.', objective:'Expand partner network', channel:'Partner' },
+      { id:'CAM005', campaignName:'Summer Solar Sale', campaignType:'Advertisement', status:'Planning', startDate:d(14), endDate:d(44), budget:'$15,000', expectedRevenue:'$200,000', actualCost:'$0', description:'Summer promotional campaign with discounts on panel bundles.', objective:'Drive Q3 sales', channel:'Digital' },
+    ],
+    Products: [
+      { id:'P001', productName:'REC Alpha 400W Panel', productCode:'REC-ALPHA-400', productCategory:'Solar Panels', unitPrice:'$285', qtyOnHand:'2500', qtyOrdered:'500', manufacturer:'REC Solar', description:'High-efficiency monocrystalline solar panel, 400W output, 25-year warranty.', vendorId:'V001', productActive:true },
+      { id:'P002', productName:'SolarEdge 5000H Inverter', productCode:'SE-5000H', productCategory:'Inverters', unitPrice:'$1,450', qtyOnHand:'120', qtyOrdered:'30', manufacturer:'SolarEdge', description:'Residential inverter with HD-Wave technology, 5kW capacity.', vendorId:'V002', productActive:true },
+      { id:'P003', productName:'IronRidge XR100 Rail', productCode:'IR-XR100', productCategory:'Mounting Systems', unitPrice:'$85', qtyOnHand:'800', qtyOrdered:'200', manufacturer:'IronRidge', description:'Aluminum mounting rail for pitched roof installations.', vendorId:'V003', productActive:true },
+      { id:'P004', productName:'Tesla Powerwall 2', productCode:'TPW-2', productCategory:'Batteries', unitPrice:'$5,500', qtyOnHand:'45', qtyOrdered:'20', manufacturer:'Tesla', description:'13.5 kWh home battery storage system.', vendorId:'V004', productActive:true },
+      { id:'P005', productName:'Enphase IQ8+ Microinverter', productCode:'EN-IQ8P', productCategory:'Inverters', unitPrice:'$175', qtyOnHand:'1800', qtyOrdered:'400', manufacturer:'Enphase', description:'Microinverter with 300W capacity, smart monitoring built-in.', vendorId:'V002', productActive:true },
+      { id:'P006', productName:'(PV) USE 10AWG Cable 500ft', productCode:'PV-10AWG-500', productCategory:'Cables & Wiring', unitPrice:'$320', qtyOnHand:'150', qtyOrdered:'50', manufacturer:'Various', description:'UV-resistant PV cable, 10 AWG, 500ft roll.', vendorId:'V005', productActive:true },
+      { id:'P007', productName:'SolarEdge Monitoring Stick', productCode:'SE-MON-1P', productCategory:'Monitoring Systems', unitPrice:'$50', qtyOnHand:'300', qtyOrdered:'100', manufacturer:'SolarEdge', description:'Monitoring platform stick for single-phase systems.', vendorId:'V002', productActive:true },
+      { id:'P008', productName:'SMA Sunny Boy 7.7kW', productCode:'SMA-SB-77', productCategory:'Inverters', unitPrice:'$2,100', qtyOnHand:'65', qtyOrdered:'15', manufacturer:'SMA', description:'Residential string inverter, 7.7kW, built-in shutdown.', vendorId:'V003', productActive:true },
+    ],
+    Quotes: [
+      { id:'Q001', quoteNumber:'QT-2026-001', quoteSubject:'SolarTech 5-Site Commercial Solar', accountId:'A001', contactId:'C001', dealId:'D001', quoteStage:'Presented', validUntil:d(30), quantity:'5', listPrice:'$485,000', discount:'0', tax:'$38,800', totalAmount:'$523,800', description:'Commercial solar installation across 5 facilities, 500kW total capacity.' },
+      { id:'Q002', quoteNumber:'QT-2026-002', quoteSubject:'GreenBuild Training & Certification', accountId:'A002', contactId:'C002', dealId:'D002', quoteStage:'Negotiating', validUntil:d(15), quantity:'1', listPrice:'$150,000', discount:'10', tax:'$12,150', totalAmount:'$147,150', description:'Installer certification program and training materials.' },
+      { id:'Q003', quoteNumber:'QT-2026-003', quoteSubject:'SunPower REC Panel Order', accountId:'A003', contactId:'C003', dealId:'D003', quoteStage:'Draft', validUntil:d(45), quantity:'1000', listPrice:'$285,000', discount:'5', tax:'$22,942', totalAmount:'$293,042', description:'1000 REC Alpha 400W panels.' },
+      { id:'Q004', quoteNumber:'QT-2026-004', quoteSubject:'ClearSkies Residential Bundle', accountId:'A005', contactId:'C005', dealId:'D005', quoteStage:'Presented', validUntil:d(20), quantity:'1', listPrice:'$95,000', discount:'0', tax:'$7,600', totalAmount:'$102,600', description:'Residential solar bundle - 20 systems worth of equipment.' },
+      { id:'Q005', quoteNumber:'QT-2026-005', quoteSubject:'Nexus Buildings Phase 1', accountId:'A006', contactId:'C006', dealId:'D006', quoteStage:'Presented', validUntil:d(30), quantity:'1', listPrice:'$600,000', discount:'3', tax:'$48,240', totalAmount:'$630,240', description:'Phase 1 solar retrofit - 4 buildings, 400kW.' },
+    ],
+    SalesOrders: [
+      { id:'SO001', soNumber:'SO-2026-001', soSubject:'OBrien Installer Network Membership', accountId:'A007', contactId:'C007', quoteId:'Q000', soStage:'Invoiced', orderDate:d(-20), deliveryDate:d(-15), subTotal:'$45,000', tax:'$3,600', totalAmount:'$48,600', description:'Annual installer network membership fee.' },
+      { id:'SO002', soNumber:'SO-2026-002', soSubject:'Thompson Farm 50kW System', accountId:'A008', contactId:'', quoteId:'Q000', soStage:'Delivered', orderDate:d(-30), deliveryDate:d(-10), subTotal:'$68,000', tax:'$5,440', totalAmount:'$73,440', description:'50kW ground-mount solar system installation.' },
+      { id:'SO003', soNumber:'SO-2026-003', soSubject:'SolarTech Panel Initial Shipment', accountId:'A001', contactId:'C001', quoteId:'Q001', soStage:'Shipped', orderDate:d(-5), deliveryDate:d(5), subTotal:'$100,000', tax:'$8,000', totalAmount:'$108,000', description:'First shipment - 350 REC Alpha panels.' },
+    ],
+    Invoices: [
+      { id:'INV001', invoiceNumber:'INV-2026-001', invoiceSubject:'OBrien Network Membership', accountId:'A007', contactId:'C007', salesOrderId:'SO001', invoiceStatus:'Paid', invoiceDate:d(-18), dueDate:d(12), subTotal:'$45,000', tax:'$3,600', amountDue:'$0', amountPaid:'$48,600', description:'Annual membership fee - paid in full.' },
+      { id:'INV002', invoiceNumber:'INV-2026-002', invoiceSubject:'Thompson Farm - Initial Deposit', accountId:'A008', contactId:'', salesOrderId:'SO002', invoiceStatus:'Paid', invoiceDate:d(-28), dueDate:d(-18), subTotal:'$27,200', tax:'$2,176', amountDue:'$0', amountPaid:'$29,376', description:'50% deposit for ground-mount system.' },
+      { id:'INV003', invoiceNumber:'INV-2026-003', invoiceSubject:'Thompson Farm - Final Payment', accountId:'A008', contactId:'', salesOrderId:'SO002', invoiceStatus:'Sent', invoiceDate:d(-10), dueDate:d(5), subTotal:'$40,800', tax:'$3,264', amountDue:'$44,064', amountPaid:'$0', description:'Final payment upon completion.' },
+      { id:'INV004', invoiceNumber:'INV-2026-004', invoiceSubject:'SolarTech Panel Shipment', accountId:'A001', contactId:'C001', salesOrderId:'SO003', invoiceStatus:'Sent', invoiceDate:d(-5), dueDate:d(10), subTotal:'$100,000', tax:'$8,000', amountDue:'$108,000', amountPaid:'$0', description:'350 REC Alpha panels.' },
+    ],
+    Vendors: [
+      { id:'V001', vendorName:'REC Solar EMEA', vendorCode:'V-REC', category:'Solar Panels', phone:'+1-805-555-0100', email:'orders@recgroup.com', website:'https://recgroup.com', street:'2730 Prospect Park Dr', city:'Rancho Cordova', state:'CA', zipCode:'95670', country:'USA', description:'Premium solar panel manufacturer, REC Alpha series specialist.', rating:'Excellent' },
+      { id:'V002', vendorName:'SolarEdge Technologies', vendorCode:'V-SE', category:'Inverters', phone:'+1-408-555-0200', email:'sales@solaredge.com', website:'https://solaredge.com', street:'5 Huntington Plaza', city:'Fremont', state:'CA', zipCode:'94538', country:'USA', description:'Leading inverter and monitoring solutions provider.', rating:'Excellent' },
+      { id:'V003', vendorName:'IronRidge Inc', vendorCode:'V-IR', category:'Mounting Systems', phone:'+1-707-555-0300', email:'orders@ironridge.com', website:'https://ironridge.com', street:'47000 Bayside Pkwy', city:'Fremont', state:'CA', zipCode:'94538', country:'USA', description:'Mounting and racking systems for solar installations.', rating:'Good' },
+      { id:'V004', vendorName:'Tesla Energy', vendorCode:'V-TSLA', category:'Batteries', phone:'+1-650-555-0400', email:'energy@tesla.com', website:'https://tesla.com/energy', street:'901 Page St', city:'Fremont', state:'CA', zipCode:'94538', country:'USA', description:'Powerwall and Megapack battery storage systems.', rating:'Excellent' },
+      { id:'V005', vendorName:'GenSol Energy Products', vendorCode:'V-GEN', category:'Cables', phone:'+1-714-555-0500', email:'sales@gensol.com', website:'https://gensolproducts.com', street:'3000 Imperial Ave', city:'San Diego', state:'CA', zipCode:'92101', country:'USA', description:'PV cables, connectors, and electrical components.', rating:'Good' },
+    ],
+    Cases: [
+      { id:'CS001', caseNumber:'CS-1001', subject:'Panel cracking on roof section B', accountId:'A001', contactId:'C001', caseType:'Problem', status:'In Progress', priority:'High', origin:'Phone', description:'Multiple panels showing micro-cracks after recent hailstorm. Warranty claim filed.', resolution:'', closedDate:'' },
+      { id:'CS002', caseNumber:'CS-1002', subject:'Inverter communication error', accountId:'A005', contactId:'C005', caseType:'Problem', status:'Solved', priority:'Medium', origin:'Email', description:'SolarEdge inverter not communicating with monitoring portal. Firmware update resolved.', resolution:'Customer updated firmware - issue resolved. Monitoring restored.', closedDate:d(-5) },
+      { id:'CS003', caseNumber:'CS-1003', subject:'Warranty registration for Powerwall', accountId:'A003', contactId:'C003', caseType:'Question', status:'New', priority:'Low', origin:'Web', description:'Customer needs help registering Tesla Powerwall warranty.', resolution:'', closedDate:'' },
+      { id:'CS004', caseNumber:'CS-1004', subject:'Installation permit delay - Austin project', accountId:'A002', contactId:'C002', caseType:'Installation', status:'Assigned', priority:'High', origin:'Email', description:'City of Austin permit office delayed solar installation permit by 2 weeks.', resolution:'', closedDate:'' },
+      { id:'CS005', caseNumber:'CS-1005', subject:'Battery capacity lower than expected', accountId:'A006', contactId:'C006', caseType:'Problem', status:'Waiting for Customer', priority:'Medium', origin:'Phone', description:'Powerwall showing only 80% of rated capacity. Needs diagnostic.', resolution:'Scheduled on-site diagnostic for next week.', closedDate:'' },
+    ],
+    Solutions: [
+      { id:'SOL001', solutionNumber:'SOL-001', title:'How to reset SolarEdge inverter communication', status:'Published', category:'Troubleshooting', productId:'P002', votes:'45', description:'My SolarEdge inverter stopped communicating with the monitoring platform. How do I reset the connection?', answer:'1. Power cycle the inverter by turning it off, waiting 30 seconds, and turning it back on.\n2. Check the home WiFi signal strength at the inverter location.\n3. Use the SetApp to reconnect to your network.\n4. If issues persist, check the家中 router settings and ensure no firewall is blocking.\n5. Contact SolarEdge support if problems continue after 15 minutes.' },
+      { id:'SOL002', solutionNumber:'SOL-002', title:'Installing IronRidge XR rail on tile roof', status:'Published', category:'Installation', productId:'P003', votes:'38', description:'Best practices for installing XR100 rail on clay tile roof?', answer:'1. Use IronRidge Tile Replacement Mounts (part # RM-TILE).\n2. Ensure flashing is installed properly under tiles to prevent leaks.\n3. Space posts 4-6 feet apart based on local wind loads.\n4. Use butyl tape around post base before flashing.\n5. Torque rail attachment bolts to 15 ft-lbs.' },
+      { id:'SOL003', solutionNumber:'SOL-003', title:'Panel warranty claim process', status:'Published', category:'Warranty', productId:'P001', votes:'52', description:'What is the process for filing a warranty claim on REC panels?', answer:'1. Gather documentation: proof of purchase, photos of defects, system info.\n2. Complete REC warranty claim form at recgroup.com/warranty\n3. Submit via email to warranty@recgroup.com\n4. REC will respond within 5 business days\n5. Do not remove panels until authorized by REC.\n6. Typical resolution: 4-6 weeks for replacement panels.' },
+      { id:'SOL004', solutionNumber:'SOL-004', title:'Enphase microinverter troubleshooting guide', status:'Published', category:'Troubleshooting', productId:'P005', votes:'67', description:'Quick guide to diagnosing Enphase IQ series issues.', answer:'1. Check Enlighten app for individual microinverter status.\n2. A gray dot means no communication - check WiFi/envoy.\n3. A red light on microinverter = hardware failure, replace unit.\n4. Verify AC disconnect is on and breakers are not tripped.\n5. For widespread issues, check utility voltage at the PV circuits.\n6. Contact Enphase support for items under warranty.' },
+    ]
+  };
+}
+
+// ============ PERSISTENCE ============
+function saveStore() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+}
+function loadStore() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    store = JSON.parse(saved);
+  } else {
+    store = getSampleData();
+    saveStore();
+  }
+}
+
+// ============ TOAST ============
+function showToast(message, type='info') {
+  const tc = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.innerHTML = '<span>' + message + '</span><button class="toast-close" onclick="this.parentElement.remove()">✕</button>';
+  tc.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+// ============ CONTEXT MENU ============
+document.addEventListener('click', () => {
+  document.getElementById('ctxMenu').classList.remove('open');
+});
+document.getElementById('ctxMenu').addEventListener('click', e => e.stopPropagation());
+
+function showCtxMenu(e, module, record) {
+  e.preventDefault();
+  ctxMenuModule = module;
+  ctxMenuRecord = record;
+  const menu = document.getElementById('ctxMenu');
+  menu.style.left = e.clientX + 'px';
+  menu.style.top = e.clientY + 'px';
+  menu.classList.add('open');
+}
+function ctxEdit() {
+  openEditModal(ctxMenuModule, ctxMenuRecord);
+  document.getElementById('ctxMenu').classList.remove('open');
+}
+function ctxDelete() {
+  if (confirm('Delete this record? This cannot be undone.')) {
+    store[ctxMenuModule] = store[ctxMenuModule].filter(r => r.id !== ctxMenuRecord.id);
+    saveStore();
+    closeDetail();
+    renderModule(currentModule);
+    showToast('Record deleted', 'success');
+  }
+  document.getElementById('ctxMenu').classList.remove('open');
+}
+function ctxClone() {
+  const rec = JSON.parse(JSON.stringify(ctxMenuRecord));
+  rec.id = generateId(ctxMenuModule);
+  rec[getNameField(ctxMenuModule)] = (rec[getNameField(ctxModule)] || rec[getNameField(ctxMenuModule)] || 'Record') + ' (Copy)';
+  store[ctxMenuModule].push(rec);
+  saveStore();
+  renderModule(currentModule);
+  showToast('Record duplicated', 'success');
+  document.getElementById('ctxMenu').classList.remove('open');
+}
+function ctxEmail() {
+  showToast('Email compose window would open here', 'info');
+  document.getElementById('ctxMenu').classList.remove('open');
+}
+
+// ============ MODULE HELPERS ============
+function getNameField(module) {
+  const m = MODULES[module];
+  if (m.fields.includes('firstName')) return 'firstName';
+  if (m.fields.includes('accountName')) return 'accountName';
+  if (m.fields.includes('dealName')) return 'dealName';
+  if (m.fields.includes('vendorName')) return 'vendorName';
+  if (m.fields.includes('campaignName')) return 'campaignName';
+  if (m.fields.includes('productName')) return 'productName';
+  if (m.fields.includes('quoteNumber')) return 'quoteNumber';
+  if (m.fields.includes('soNumber')) return 'soNumber';
+  if (m.fields.includes('invoiceNumber')) return 'invoiceNumber';
+  if (m.fields.includes('caseNumber')) return 'caseNumber';
+  if (m.fields.includes('solutionNumber')) return 'solutionNumber';
+  if (m.fields.includes('subject')) return 'subject';
+  if (m.fields.includes('title')) return 'title';
+  return m.fields[0];
+}
+function getDisplayName(module, record) {
+  const nf = getNameField(module);
+  if (nf === 'firstName' && record.firstName) {
+    return record.firstName + ' ' + (record.lastName || '');
+  }
+  return record[nf] || 'Untitled';
+}
+function generateId(module) {
+  const prefixes = { Leads:'L', Contacts:'C', Accounts:'A', Deals:'D', Activities:'ACT', Campaigns:'CAM', Products:'P', Quotes:'Q', SalesOrders:'SO', Invoices:'INV', Vendors:'V', Cases:'CS', Solutions:'SOL' };
+  const prefix = prefixes[module] || 'X';
+  return prefix + String(Date.now()).slice(-4) + Math.floor(Math.random() * 100);
+}
+function formatCurrency(val) {
+  if (!val) return '';
+  if (typeof val === 'number') return '$' + val.toLocaleString();
+  return val;
+}
+function getStatusTag(status) {
+  const s = status?.toLowerCase() || '';
+  if (s.includes('won') || s.includes('closed') || s.includes('completed') || s.includes('paid') || s.includes('delivered') || s.includes('published') || s.includes('active') || s.includes('qualified')) return 'tag-active';
+  if (s.includes('lost') || s.includes('cancelled') || s.includes('closed lost') || s.includes('rejected') || s.includes('expired') || s.includes('inactive')) return 'tag-lost';
+  if (s.includes('new') || s.includes('draft')) return 'tag-new';
+  if (s.includes('hot') || s.includes('contacted') || s.includes('negotiation') || s.includes('in progress')) return 'tag-prospect';
+  if (s.includes('qualified') || s.includes('proposal sent') || s.includes('negotiating')) return 'tag-qualified';
+  if (s.includes('follow') || s.includes('open') || s.includes('assigned')) return 'tag-followup';
+  return 'tag-new';
+}
+function lookupRecord(module, id) {
+  if (!id || !store[module]) return { text: id, id };
+  const rec = store[module].find(r => r.id === id);
+  return rec ? { text: getDisplayName(module, rec), id: rec.id } : { text: id, id };
+}
+function lookupText(module, id) {
+  const lu = lookupRecord(module, id);
+  return lu.text;
+}
+function getRelatedRecords(module, relatedModule, relatedField) {
+  if (!store[module] || !store[relatedModule]) return [];
+  return store[module].filter(r => r[relatedField] && r[relatedField] === relatedModule);
+}
+function getActivitiesForRecord(module, recordId) {
+  if (!store.Activities) return [];
+  return store.Activities.filter(a => a.relatedToModule === module && a.relatedToId === recordId);
+}
+
+// ============ SWITCH MODULE ============
+function switchModule(module) {
+  currentModule = module;
+  document.querySelectorAll('.sidebar-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.module === module);
+  });
+  closeDetail();
+  closeModal();
+  renderModule(module);
+}
+
+// ============ RENDER MODULE ============
+function renderModule(module) {
+  const main = document.getElementById('mainContent');
+  if (module === 'Dashboards') { renderDashboard(main); return; }
+  if (module === 'Reports') { renderReports(main); return; }
+  if (module === 'Settings') { renderSettings(main); return; }
+
+  const def = MODULES[module];
+  let toolbar = `
+    <div class="toolbar">
+      <input type="text" class="search" placeholder="Search ${def.plural}..." id="moduleSearch" onkeyup="filterTable(event)">
+      <select id="filterStatus" onchange="filterTable()" style="width:150px">
+        <option value="">All Statuses</option>
+        ${def.selects && def.selects[def.selects ? Object.keys(def.selects)[0] : 'leadStatus'] ? Object.values(def.selects[def.selects ? Object.keys(def.selects)[0] : 'leadStatus']).map(s => `<option value="${s}">${s}</option>`).join('') : ''}
+      </select>
+      <button class="btn btn-primary" onclick="openCreateModal('${module}')">+ New ${def.singular}</button>
+      <button class="btn btn-secondary btn-sm" onclick="exportData()">📥 Export</button>
+    </div>`;
+
+  let tableHeaders = def.columns.map(col => `<th class="sort" onclick="sortTable('${col}')">${def.listLabels[col] || def.labels[col] || col}</th>`).join('');
+  let tableBody = buildTableRows(module, def);
+
+  main.innerHTML = `
+    <div class="content-header">
+      <h1>${module}</h1>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="openCreateModal('${module}')">+ New ${def.singular}</button>
+        <button class="btn btn-secondary" onclick="refreshData()">🔄 Refresh</button>
+      </div>
+    </div>
+    ${toolbar}
+    <div class="module-tabs">
+      <div class="module-tab active" onclick="showAllRecords()">All ${def.plural} <span class="count">${store[module]?.length || 0}</span></div>
+      <div class="module-tab" onclick="showMyRecords()">My ${def.plural}</div>
+    </div>
+    <div class="list-container">
+      <table class="list-table" id="dataTable">
+        <thead><tr>${tableHeaders}<th>Actions</th></tr></thead>
+        <tbody>${tableBody}</tbody>
+      </table>
+    </div>
+    <div class="pagination-wrap">
+      <div class="pagination-info">Showing <span id="recCount">${store[module]?.length || 0}</span> records</div>
+      <div class="pagination">
+        <button disabled>◀</button><button class="active">1</button><button>2</button><button>3</button><button>▶</button>
+      </div>
+    </div>`;
+}
+
+function buildTableRows(module, def, filterFn) {
+  let records = store[module] || [];
+  if (filterFn) records = records.filter(filterFn);
+  if (!records.length) return '<tr><td colspan="20" style="text-align:center;padding:40px;color:#999">No records found</td></tr>';
+  return records.map(rec => {
+    const nameField = getNameField(module);
+    let nameDisplay = getDisplayName(module, rec);
+    const nameLink = def.columns.includes(nameField) || def.columns[0] === nameField
+      ? `<a class="name-link" onclick="openDetail('${module}','${rec.id}')">${nameDisplay}</a>`
+      : `<span>${nameDisplay}</span>`;
+
+    let cells = def.columns.map(col => {
+      let val = rec[col];
+      if (col === 'amount' || col === 'budget' || col === 'totalAmount' || col === 'subTotal' || col === 'amountDue' || col === 'annualRevenue' || col === 'listPrice' || col === 'unitPrice' || col === 'expectedRevenue' || col === 'actualCost') {
+        val = formatCurrency(val);
+      }
+      if (col === 'stage' || col === 'status' || col === 'leadStatus' || col === 'invoiceStatus' || col === 'caseType' || col === 'priority') {
+        val = `<span class="tag ${getStatusTag(val)}">${val || ''}</span>`;
+      }
+      if (col === 'accountId' || col === 'contactId' || col === 'dealId' || col === 'quoteId' || col === 'salesOrderId' || col === 'vendorId' || col === 'productId' || col === 'campaignId') {
+        val = lookupText(module === 'Activities' ? (rec.relatedToModule || 'Leads') : (col === 'accountId' ? 'Accounts' : col === 'contactId' ? 'Contacts' : col === 'dealId' ? 'Deals' : col === 'quoteId' ? 'Quotes' : col === 'salesOrderId' ? 'SalesOrders' : col === 'vendorId' ? 'Vendors' : col === 'productId' ? 'Products' : 'Campaigns'), val);
+      }
+      return `<td>${val || '<span style="color:#ccc">—</span>'}</td>`;
+    }).join('');
+
+    return `<tr oncontextmenu="showCtxMenu(event,'${module}', ${JSON.stringify(rec).replace(/"/g,'&quot;')})" ondblclick="openDetail('${module}','${rec.id}')">
+      ${cells}
+      <td>
+        <div class="row-actions">
+          <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openDetail('${module}','${rec.id}')" title="View">👁️</button>
+          <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();openEditModal('${module}',${JSON.stringify(rec).replace(/"/g,'&quot;')})" title="Edit">✏️</button>
+          <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation();deleteRecord('${module}','${rec.id}')" title="Delete">🗑️</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterTable(e) {
+  if (e && e.key !== 'Enter') return;
+  const search = document.getElementById('moduleSearch')?.value?.toLowerCase() || '';
+  const statusFilter = document.getElementById('filterStatus')?.value || '';
+  const def = MODULES[currentModule];
+  const rows = document.querySelectorAll('#dataTable tbody tr');
+  rows.forEach(row => {
+    let show = true;
+    const text = row.textContent.toLowerCase();
+    if (search && !text.includes(search)) show = false;
+    if (statusFilter && !row.innerHTML.includes(`>${statusFilter}<`)) show = false;
+    row.style.display = show ? '' : 'none';
+  });
+}
+
+function sortTable(col) {
+  showToast('Sort by ' + col + ' applied', 'info');
+}
+
+// ============ DETAIL PANE ============
+function openDetail(module, id) {
+  currentModule = module;
+  const def = MODULES[module];
+  const rec = store[module]?.find(r => r.id === id);
+  if (!rec) return;
+  currentRecord = rec;
+
+  const detailPane = document.getElementById('detailPane');
+  document.getElementById('detailPaneTitle').textContent = getDisplayName(module, rec);
+
+  let fieldsHtml = '';
+  def.fields.forEach((field, i) => {
+    if (i % 2 === 0) {
+      let f1 = def.fields[i], f2 = def.fields[i+1];
+      let v1 = rec[f1], v2 = rec[f2];
+      if (f1 === 'accountId' || f1 === 'contactId' || f1 === 'dealId' || f1 === 'quoteId' || f1 === 'salesOrderId' || f1 === 'vendorId' || f1 === 'productId' || f1 === 'campaignId' || f1 === 'relatedToId') {
+        v1 = lookupText(f1 === 'relatedToId' ? (rec.relatedToModule || 'Leads') : f1 === 'accountId' ? 'Accounts' : f1 === 'contactId' ? 'Contacts' : f1 === 'dealId' ? 'Deals' : f1 === 'quoteId' ? 'Quotes' : f1 === 'salesOrderId' ? 'SalesOrders' : f1 === 'vendorId' ? 'Vendors' : f1 === 'productId' ? 'Products' : 'Campaigns', v1);
+      }
+      if (f2 && (f2 === 'accountId' || f2 === 'contactId' || f2 === 'dealId' || f2 === 'quoteId' || f2 === 'salesOrderId' || f2 === 'vendorId' || f2 === 'productId' || f2 === 'campaignId' || f2 === 'relatedToId')) {
+        v2 = lookupText(f2 === 'relatedToId' ? (rec.relatedToModule || 'Leads') : f2 === 'accountId' ? 'Accounts' : f2 === 'contactId' ? 'Contacts' : f2 === 'dealId' ? 'Deals' : f2 === 'quoteId' ? 'Quotes' : f2 === 'salesOrderId' ? 'SalesOrders' : f2 === 'vendorId' ? 'Vendors' : f2 === 'productId' ? 'Products' : 'Campaigns', v2);
+      }
+      if (f1 === 'email' || f1 === 'emailLink') v1 = `<a class="email-link" href="mailto:${v1}">${v1}</a>`;
+      if (f2 === 'email') v2 = `<a class="email-link" href="mailto:${v2}">${v2}</a>`;
+      if (f1 === 'website') v1 = `<a href="${v1}" target="_blank">${v1}</a>`;
+      if (f2 === 'website') v2 = `<a href="${v2}" target="_blank">${v2}</a>`;
+      if (f1 === 'stage' || f1 === 'status' || f1 === 'leadStatus' || f1 === 'invoiceStatus' || f1 === 'caseType') v1 = `<span class="tag ${getStatusTag(v1)}">${v1 || ''}</span>`;
+      if (f2 === 'stage' || f2 === 'status' || f2 === 'leadStatus' || f2 === 'invoiceStatus' || f2 === 'caseType') v2 = `<span class="tag ${getStatusTag(v2)}">${v2 || ''}</span>`;
+      fieldsHtml += `<div class="detail-grid">`;
+      fieldsHtml += `<div class="detail-field"><label>${def.labels[f1] || f1}</label><div class="value">${v1 || '<span style="color:#ccc">—</span>'}</div></div>`;
+      if (f2) fieldsHtml += `<div class="detail-field"><label>${def.labels[f2] || f2}</label><div class="value">${v2 || '<span style="color:#ccc">—</span>'}</div></div>`;
+      fieldsHtml += `</div>`;
+    }
+  });
+
+  const activities = getActivitiesForRecord(module, id);
+  let activityHtml = activities.length ? activities.map(a => `
+    <div class="activity-item">
+      <div class="activity-icon ${a.activityType.toLowerCase()}">${a.activityType === 'Call' ? '📞' : a.activityType === 'Meeting' ? '🤝' : a.activityType === 'Task' ? '📋' : '📧'}</div>
+      <div class="activity-content">
+        <div class="title">${a.subject}</div>
+        <div class="desc">${a.description || ''}</div>
+        <div class="time">${a.dueDate || ''} ${a.dueTime || ''} · ${a.status}</div>
+      </div>
+    </div>`).join('') : '<p style="color:#999;text-align:center;padding:20px">No activities recorded</p>';
+
+  let relatedHtml = buildRelatedSection(module, rec);
+
+  document.getElementById('detailPaneBody').innerHTML = `
+    <div class="detail-tabs">
+      <div class="detail-tab active" onclick="switchDetailTab(this,'details')">Details</div>
+      <div class="detail-tab" onclick="switchDetailTab(this,'activities')">Activities</div>
+      <div class="detail-tab" onclick="switchDetailTab(this,'related')">Related</div>
+    </div>
+    <div id="tab-details" class="detail-tab-content active">
+      <div class="detail-section">
+        <h3>Information</h3>
+        ${fieldsHtml}
+      </div>
+      ${rec.description ? `<div class="detail-section"><h3>Description</h3><p>${rec.description}</p></div>` : ''}
+    </div>
+    <div id="tab-activities" class="detail-tab-content">
+      <div class="detail-section">
+        <h3>Activities <button class="btn btn-primary btn-sm" onclick="openCreateActivityFor('${module}','${id}')" style="float:right">+ Log Activity</button></h3>
+        ${activityHtml}
+      </div>
+    </div>
+    <div id="tab-related" class="detail-tab-content">
+      ${relatedHtml}
+    </div>`;
+
+  detailPane.classList.add('open');
+}
+
+function switchDetailTab(el, tabId) {
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.detail-tab-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+function buildRelatedSection(module, rec) {
+  let html = '';
+  // Contacts for Accounts
+  if (module === 'Accounts') {
+    const contacts = store.Contacts?.filter(c => c.accountId === rec.id) || [];
+    html += `<div class="detail-section"><h3>Contacts (${contacts.length})</h3>`;
+    html += contacts.length ? contacts.map(c => `<div class="related-item"><a class="name" onclick="openDetail('Contacts','${c.id}')">${getDisplayName('Contacts',c)}</a><span class="meta">${c.title || ''}</span></div>`).join('') : '<p style="color:#999">No contacts</p>';
+    html += `</div>`;
+    const deals = store.Deals?.filter(d => d.accountId === rec.id) || [];
+    html += `<div class="detail-section"><h3>Deals (${deals.length})</h3>`;
+    html += deals.length ? deals.map(d => `<div class="related-item"><a class="name" onclick="openDetail('Deals','${d.id}')">${d.dealName}</a><span class="meta">${d.stage} · ${formatCurrency(d.amount)}</span></div>`).join('') : '<p style="color:#999">No deals</p>';
+    html += `</div>`;
+  }
+  // Deals for Contacts
+  if (module === 'Contacts') {
+    const deals = store.Deals?.filter(d => d.contactId === rec.id) || [];
+    html += `<div class="detail-section"><h3>Deals (${deals.length})</h3>`;
+    html += deals.length ? deals.map(d => `<div class="related-item"><a class="name" onclick="openDetail('Deals','${d.id}')">${d.dealName}</a><span class="meta">${d.stage}</span></div>`).join('') : '<p style="color:#999">No deals</p>';
+    html += `</div>`;
+  }
+  // Accounts for Contacts
+  if (module === 'Contacts' && rec.accountId) {
+    const acct = store.Accounts?.find(a => a.id === rec.accountId);
+    if (acct) {
+      html += `<div class="detail-section"><h3>Account</h3><div class="related-item"><a class="name" onclick="openDetail('Accounts','${acct.id}')">${acct.accountName}</a></div></div>`;
+    }
+  }
+  // Activity log already shown in tab
+  return html || '<p style="color:#999;text-align:center;padding:20px">No related records</p>';
+}
+
+function closeDetail() {
+  document.getElementById('detailPane').classList.remove('open');
+  currentRecord = null;
+}
+
+// ============ MODAL ============
+function openCreateModal(module) {
+  editMode = false;
+  currentRecord = null;
+  const def = MODULES[module];
+  document.getElementById('modalTitle').textContent = `New ${def.singular}`;
+  document.getElementById('modalBody').innerHTML = buildForm(module, null);
+  document.getElementById('modalSaveBtn').textContent = `Create ${def.singular}`;
+  modalSaveCallback = (data) => {
+    data.id = generateId(module);
+    if (!store[module]) store[module] = [];
+    store[module].push(data);
+    saveStore();
+    renderModule(module);
+    updateCounts();
+    showToast(`${def.singular} created successfully!`, 'success');
+  };
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function openEditModal(module, record) {
+  editMode = true;
+  currentRecord = record;
+  const def = MODULES[module];
+  document.getElementById('modalTitle').textContent = `Edit ${def.singular}`;
+  document.getElementById('modalBody').innerHTML = buildForm(module, record);
+  document.getElementById('modalSaveBtn').textContent = `Save Changes`;
+  modalSaveCallback = (data) => {
+    const idx = store[module].findIndex(r => r.id === record.id);
+    if (idx >= 0) {
+      store[module][idx] = { ...store[module][idx], ...data };
+      saveStore();
+      renderModule(module);
+      if (currentRecord && currentRecord.id) openDetail(module, record.id);
+      updateCounts();
+      showToast(`${def.singular} updated!`, 'success');
+    }
+  };
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function openCreateActivityFor(module, id) {
+  document.getElementById('modalTitle').textContent = 'Log Activity';
+  document.getElementById('modalBody').innerHTML = buildForm('Activities', { relatedToModule: module, relatedToId: id });
+  document.getElementById('modalSaveBtn').textContent = 'Log Activity';
+  modalSaveCallback = (data) => {
+    data.id = generateId('Activities');
+    if (!store.Activities) store.Activities = [];
+    store.Activities.push(data);
+    saveStore();
+    if (currentRecord) openDetail(currentModule, currentRecord.id);
+    renderModule(currentModule);
+    showToast('Activity logged!', 'success');
+  };
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function buildForm(module, record) {
+  const def = MODULES[module];
+  let html = '<div class="form-grid">';
+  def.fields.forEach(field => {
+    const type = def.types[field] || 'text';
+    const label = def.labels[field] || field;
+    const val = record ? (record[field] || '') : '';
+    const isRequired = ['firstName','lastName','company','email','accountName','dealName','vendorName','campaignName','productName','quoteNumber','soNumber','invoiceNumber','caseNumber','solutionNumber','subject','title'].includes(field) ? ' <span style="color:red">*</span>' : '';
+    let input = '';
+    if (type === 'select' && def.selects[field]) {
+      input = `<select id="f_${field}" ${field === 'relatedToModule' ? 'onchange="updateRelatedToLookup()" ' : ''}>` +
+        `<option value="">Select...</option>` +
+        def.selects[field].map(opt => `<option value="${opt}" ${val === opt ? 'selected' : ''}>${opt}</option>`).join('') +
+        '</select>';
+    } else if (type === 'textarea') {
+      input = `<textarea id="f_${field}" rows="3">${val}</textarea>`;
+    } else if (type === 'checkbox') {
+      input = `<input type="checkbox" id="f_${field}" ${val ? 'checked' : ''} style="width:auto">`;
+    } else {
+      input = `<input type="${type}" id="f_${field}" value="${val}" placeholder="${label}">`;
+    }
+    html += `<div class="form-group${type === 'textarea' ? ' full' : ''}">
+      <label>${label}${isRequired}</label>
+      ${input}
+    </div>`;
+  });
+  html += '</div>';
+  if (module === 'Activities') {
+    html += `<script>function updateRelatedToLookup(){const mod=document.getElementById('f_relatedToModule').value;const sel=document.getElementById('f_relatedToId');if(mod&&store[mod]){sel.innerHTML='<option value="">Select...</option>'+store[mod].map(r=>'<option value="'+r.id+'">'+getDisplayName(mod,r)+'</option>').join('');}}<\/script>`;
+  }
+  return html;
+}
+
+function saveModalForm() {
+  if (!modalSaveCallback) return;
+  const def = MODULES[currentModule];
+  const data = {};
+  def.fields.forEach(field => {
+    const el = document.getElementById('f_' + field);
+    if (!el) return;
+    let val = el.type === 'checkbox' ? el.checked : el.value;
+    data[field] = val;
+  });
+  // Required validation
+  const required = ['firstName','lastName','company','email','accountName','dealName','vendorName','campaignName','productName','quoteNumber','soNumber','invoiceNumber','caseNumber','solutionNumber','subject','title'];
+  for (let r of required) {
+    if (def.fields.includes(r) && !data[r]?.trim()) {
+      showToast(`${def.labels[r] || r} is required`, 'error');
+      return;
+    }
+  }
+  modalSaveCallback(data);
+  closeModal();
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  modalSaveCallback = null;
+}
+
+// ============ DELETE RECORD ============
+function deleteRecord(module, id) {
+  if (!confirm('Delete this record? This cannot be undone.')) return;
+  store[module] = store[module].filter(r => r.id !== id);
+  saveStore();
+  closeDetail();
+  renderModule(module);
+  updateCounts();
+  showToast('Record deleted', 'success');
+}
+
+// ============ UPDATE COUNTS ============
+function updateCounts() {
+  Object.keys(MODULES).forEach(mod => {
+    const el = document.getElementById('count-' + mod);
+    if (el && store[mod]) {
+      el.textContent = store[mod].length;
+    }
+  });
+}
+
+// ============ REFRESH ============
+function refreshData() {
+  renderModule(currentModule);
+  showToast('Data refreshed', 'success');
+}
+
+// ============ EXPORT ============
+function exportData() {
+  const data = JSON.stringify(store, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'zoho_crm_export.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Data exported', 'success');
+}
+
+// ============ GLOBAL SEARCH ============
+function handleGlobalSearch(e) {
+  if (e.key !== 'Enter') return;
+  const q = e.target.value.toLowerCase().trim();
+  if (!q) return;
+  let found = null;
+  outer: for (let mod of Object.keys(store)) {
+    for (let rec of (store[mod] || [])) {
+      const name = getDisplayName(mod, rec).toLowerCase();
+      if (name.includes(q) || rec.email?.toLowerCase().includes(q) || rec.phone?.includes(q) || rec.company?.toLowerCase().includes(q)) {
+        found = { module: mod, record: rec };
+        break outer;
+      }
+    }
+  }
+  if (found) {
+    switchModule(found.module);
+    setTimeout(() => openDetail(found.module, found.record.id), 100);
+  } else {
+    showToast('No results found for "' + q + '"', 'warning');
+  }
+  e.target.value = '';
+}
+
+// ============ SHOW ALL / MY ============
+function showAllRecords() {
+  document.querySelectorAll('.module-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+  renderModule(currentModule);
+}
+function showMyRecords() {
+  document.querySelectorAll('.module-tab').forEach((t,i) => t.classList.toggle('active', i===1));
+  const def = MODULES[currentModule];
+  renderModule(currentModule);
+  // Just re-render with a "my" filter notice
+  document.querySelector('.pagination-info').innerHTML += ' <span style="color:var(--primary)">(Filtered: My Records)</span>';
+}
+
+// ============ DASHBOARD ============
+function renderDashboard(main) {
+  const totalLeads = store.Leads?.length || 0;
+  const totalDeals = store.Deals?.length || 0;
+  const wonDeals = store.Deals?.filter(d => d.stage === 'Closed Won') || [];
+  const totalRevenue = wonDeals.reduce((sum, d) => sum + (parseFloat(String(d.amount).replace(/[$,]/g,'')) || 0), 0);
+  const openCases = store.Cases?.filter(c => !['Solved','Closed'].includes(c.status)) || [];
+  const activities = store.Activities || [];
+  const todayActivities = activities.filter(a => a.dueDate === new Date().toISOString().split('T')[0]);
+  const openInvoices = store.Invoices?.filter(i => i.invoiceStatus === 'Sent' || i.invoiceStatus === 'Overdue') || [];
+  const totalInvoiceDue = openInvoices.reduce((sum, i) => sum + (parseFloat(String(i.amountDue || '0').replace(/[$,]/g,'')) || 0), 0);
+
+  const monthlyData = [45, 62, 58, 71, 85, 92, 88, 95, 110, 125, 118, 130];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  main.innerHTML = `
+    <div class="content-header">
+      <h1>📊 Dashboards</h1>
+    </div>
+    <div class="module-tabs">
+      <div class="module-tab active">Sales Overview</div>
+      <div class="module-tab">Pipeline</div>
+      <div class="module-tab">Service</div>
+      <div class="module-tab">Activities</div>
+    </div>
+    <div class="tab-content active">
+      <div class="dashboard-grid">
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Total Revenue</h3><span>💰</span></div>
+          <div class="dash-card-body">
+            <div class="stat-big">$${totalRevenue.toLocaleString()}</div>
+            <div class="stat-label">From Closed Won Deals</div>
+            <div class="stat-change up">↑ 23% vs last quarter</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Leads</h3><span>👤</span></div>
+          <div class="dash-card-body">
+            <div class="stat-big">${totalLeads}</div>
+            <div class="stat-label">Total Leads</div>
+            <div class="mini-chart">${monthlyData.map((v,i)=>`<div class="bar${i===11?' highlight':''}" style="height:${Math.round(v/130*50)}px"></div>`).join('')}</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Active Deals</h3><span>💰</span></div>
+          <div class="dash-card-body">
+            <div class="stat-big">${totalDeals}</div>
+            <div class="stat-label">Total Deals</div>
+            <div class="stat-change up">↑ ${wonDeals.length} won this period</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Open Cases</h3><span>🎗️</span></div>
+          <div class="dash-card-body">
+            <div class="stat-big">${openCases.length}</div>
+            <div class="stat-label">Cases Requiring Attention</div>
+            <div class="stat-change down">↓ ${store.Cases?.filter(c=>c.priority==='High').length || 0} high priority</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Invoice Pipeline</h3><span>💳</span></div>
+          <div class="dash-card-body">
+            <div class="stat-big">${openInvoices.length}</div>
+            <div class="stat-label">Open Invoices</div>
+            <div class="stat-change">$${totalInvoiceDue.toLocaleString()} outstanding</div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Today's Activities</h3><span>📅</span></div>
+          <div class="dash-card-body">
+            <div class="stat-big">${todayActivities.length}</div>
+            <div class="stat-label">Activities Due Today</div>
+            <div class="stat-change">${activities.filter(a=>a.status==='In Progress').length} in progress</div>
+          </div>
+        </div>
+        <div class="dash-card" style="grid-column:span 2">
+          <div class="dash-card-header"><h3>Monthly Lead Flow</h3><span>📈</span></div>
+          <div class="dash-card-body">
+            <canvas id="leadChart" width="500" height="160"></canvas>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Lead Sources</h3><span>🔍</span></div>
+          <div class="dash-card-body">
+            <div class="dash-list">
+              ${[['Web',35],['Referral',28],['Trade Show',18],['Partner',12],['Cold Call',7]].map(([k,v])=>`<div class="dash-list-item"><div class="dot" style="background:var(--primary)"></div><div class="label">${k}</div><div class="value">${v}%</div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Deal Pipeline</h3><span>💹</span></div>
+          <div class="dash-card-body">
+            <div class="dash-list">
+              ${[['Qualification',3,'#e65100'],['Needs Analysis',2,'#f57c00'],['Proposal Sent',4,'#f57c00'],['Negotiation',1,'#f9a825'],['Closed Won',2,'#2e7d32']].map(([k,v,c])=>`<div class="dash-list-item"><div class="dot" style="background:${c}"></div><div class="label">${k}</div><div class="value">${v}</div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Top Products</h3><span>📦</span></div>
+          <div class="dash-card-body">
+            <div class="dash-list">
+              ${store.Products?.slice(0,4).map(p=>`<div class="dash-list-item"><div class="dot" style="background:var(--primary)"></div><div class="label">${p.productName}</div><div class="value">${p.qtyOnHand}</div></div>`).join('') || '<p style="color:#999">No products</p>'}
+            </div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Recent Activities</h3><span>🕐</span></div>
+          <div class="dash-card-body">
+            <div class="dash-list">
+              ${activities.slice(0,5).map(a=>`<div class="dash-list-item"><div class="dot" style="background:#f57c00"></div><div class="label">${a.subject}</div><div class="value">${a.dueDate||'—'}</div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  setTimeout(drawLeadChart, 50);
+}
+
+function drawLeadChart() {
+  const canvas = document.getElementById('leadChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const data = [45, 62, 58, 71, 85, 92, 88, 95, 110, 125, 118, 130];
+  const max = Math.max(...data);
+  const w = canvas.width;
+  const h = canvas.height;
+  const barW = w / data.length - 4;
+  ctx.clearRect(0, 0, w, h);
+  data.forEach((v, i) => {
+    const barH = (v / max) * (h - 20);
+    const x = i * (w / data.length) + 2;
+    const y = h - barH - 10;
+    ctx.fillStyle = i === 11 ? '#e8a838' : '#294a85';
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = '#666';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i], x + barW / 2, h - 2);
+  });
+}
+
+// ============ REPORTS ============
+function renderReports(main) {
+  main.innerHTML = `
+    <div class="content-header">
+      <h1>📈 Reports</h1>
+    </div>
+    <div class="module-tabs">
+      <div class="module-tab active">Sales Reports</div>
+      <div class="module-tab">Pipeline Reports</div>
+      <div class="module-tab">Activity Reports</div>
+    </div>
+    <div class="tab-content active">
+      <div class="report-filters">
+        <label style="font-weight:600;font-size:12px">Period:</label>
+        <select><option>Last 30 Days</option><option>Last Quarter</option><option>This Year</option><option>All Time</option></select>
+        <select><option>All Sales Reps</option><option>Jamie Mitchell</option></select>
+        <select><option>All Regions</option><option>West</option><option>East</option><option>Central</option></select>
+        <button class="btn btn-primary btn-sm" onclick="showToast('Report generated','success')">Generate Report</button>
+        <button class="btn btn-secondary btn-sm" onclick="exportData()">📥 Export</button>
+      </div>
+      <div class="report-chart-area">
+        <canvas id="reportChart" width="800" height="300"></canvas>
+        <div style="margin-top:24px">
+          <h3 style="color:var(--primary);margin-bottom:12px">📊 Sales Performance Summary</h3>
+          <table class="list-table" style="min-width:600px">
+            <thead><tr><th>Sales Rep</th><th>Leads</th><th>Deals Won</th><th>Revenue</th><th>Win Rate</th><th>Avg Deal Size</th></tr></thead>
+            <tbody>
+              <tr><td>Jamie Mitchell</td><td>${store.Leads?.length||0}</td><td>${store.Deals?.filter(d=>d.stage==='Closed Won').length||0}</td><td>$${(store.Deals?.filter(d=>d.stage==='Closed Won').reduce((s,d)=>s+(parseFloat(String(d.amount||0).replace(/[$,]/g,''))||0),0)||0).toLocaleString()}</td><td>67%</td><td>$${Math.round(((store.Deals?.filter(d=>d.stage==='Closed Won').reduce((s,d)=>s+(parseFloat(String(d.amount||0).replace(/[$,]/g,''))||0),0)||0)/(store.Deals?.filter(d=>d.stage==='Closed Won').length||1)))}</td></tr>
+            </tbody>
+          </table>
+          <div class="mt-16">
+            <h3 style="color:var(--primary);margin-bottom:12px">📋 Pipeline by Stage</h3>
+            <table class="list-table" style="min-width:600px">
+              <thead><tr><th>Stage</th><th>Count</th><th>Total Value</th><th>Weighted Value</th></tr></thead>
+              <tbody>
+                ${['Qualification','Needs Analysis','Value Proposition','Proposal Sent','Negotiation Review','Closed Won'].map(s=>{const ds=store.Deals?.filter(d=>d.stage===s)||[];const tot=ds.reduce((a,b)=>a+(parseFloat(String(b.amount||'0').replace(/[$,]/g,''))||0),0);return`<tr><td><span class="tag ${getStatusTag(s)}">${s}</span></td><td>${ds.length}</td><td>$${tot.toLocaleString()}</td><td>$${Math.round(tot*(ds[0]?parseFloat(ds[0].probability||'0')/100:0)).toLocaleString()}</td></tr>`;}).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  setTimeout(drawReportChart, 50);
+}
+
+function drawReportChart() {
+  const canvas = document.getElementById('reportChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const stages = ['Qualification','Needs Analysis','Value Proposition','Proposal Sent','Negotiation Review','Closed Won'];
+  const colors = ['#e65100','#f57c00','#f9a825','#fbc02d','#7cb342','#2e7d32'];
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0,0,w,h);
+  const max = 500000;
+  const barW = (w - 100) / stages.length - 20;
+  stages.forEach((s,i) => {
+    const ds = store.Deals?.filter(d=>d.stage===s)||[];
+    const val = ds.reduce((a,b)=>a+(parseFloat(String(b.amount||'0').replace(/[$,]/g,''))||0),0);
+    const barH = max > 0 ? (val/max)*(h-60) : 0;
+    const x = 50 + i * ((w-50)/stages.length) + 10;
+    const y = h - barH - 30;
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(x, y, barW, barH);
+    ctx.fillStyle = '#333';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(s, x + barW/2, h - 10);
+    ctx.fillText('$' + (val/1000).toFixed(0) + 'K', x + barW/2, y - 5);
+  });
+}
+
+// ============ SETTINGS ============
+function renderSettings(main) {
+  main.innerHTML = `
+    <div class="content-header">
+      <h1>⚙️ Settings</h1>
+    </div>
+    <div class="settings-container">
+      <div class="settings-section open">
+        <div class="settings-section-header" onclick="toggleSettingsSection(this)">
+          <h3>🔔 Notifications</h3>
+          <span class="toggle">▶</span>
+        </div>
+        <div class="settings-section-body">
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Email Notifications</div><div class="setting-desc">Receive email alerts for new leads and deal updates</div></div>
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Daily Digest</div><div class="setting-desc">Summary email of daily activities</div></div>
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Deal Stage Alerts</div><div class="setting-desc">Notify when deals change stage</div></div>
+            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-header" onclick="toggleSettingsSection(this)">
+          <h3>🎨 Appearance</h3>
+          <span class="toggle">▶</span>
+        </div>
+        <div class="settings-section-body">
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Theme</div><div class="setting-desc">Choose your preferred color theme</div></div>
+            <div class="radio-group">
+              <label class="radio-opt"><input type="radio" name="theme" checked> Blue</label>
+              <label class="radio-opt"><input type="radio" name="theme"> Dark</label>
+              <label class="radio-opt"><input type="radio" name="theme"> Light</label>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Records Per Page</div><div class="setting-desc">Default number of records per list page</div></div>
+            <select style="width:100px"><option>25</option><option selected>50</option><option>100</option></select>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-header" onclick="toggleSettingsSection(this)">
+          <h3>🔒 Security</h3>
+          <span class="toggle">▶</span>
+        </div>
+        <div class="settings-section-body">
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Two-Factor Authentication</div><div class="setting-desc">Require 2FA for all logins</div></div>
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Session Timeout</div><div class="setting-desc">Auto-logout after inactivity</div></div>
+            <select style="width:100px"><option>15 min</option><option selected>30 min</option><option>1 hour</option></select>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">IP Restrictions</div><div class="setting-desc">Allow access only from trusted IPs</div></div>
+            <div class="toggle-switch" onclick="this.classList.toggle('active')"></div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-header" onclick="toggleSettingsSection(this)">
+          <h3>📋 Data Management</h3>
+          <span class="toggle">▶</span>
+        </div>
+        <div class="settings-section-body">
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Auto-save Drafts</div><div class="setting-desc">Automatically save form drafts every 30 seconds</div></div>
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Data Export</div><div class="setting-desc">Export all CRM data as JSON</div></div>
+            <button class="btn btn-secondary btn-sm" onclick="exportData()">📥 Export All Data</button>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Reset to Demo Data</div><div class="setting-desc">Clear all data and reload sample solar industry data</div></div>
+            <button class="btn btn-danger btn-sm" onclick="if(confirm('Reset ALL data? This cannot be undone.')){store=getSampleData();saveStore();renderModule(currentModule);updateCounts();showToast('Data reset to demo data','success');}">🔄 Reset Data</button>
+          </div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-header" onclick="toggleSettingsSection(this)">
+          <h3>📧 Email Integration</h3>
+          <span class="toggle">▶</span>
+        </div>
+        <div class="settings-section-body">
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Email Client</div><div class="setting-desc">Connect your email client for logging</div></div>
+            <select style="width:140px"><option>Gmail</option><option>Outlook</option><option>Zoho Mail</option><option>Other</option></select>
+          </div>
+          <div class="setting-row">
+            <div class="setting-info"><div class="setting-name">Auto-log Emails</div><div class="setting-desc">Automatically log emails to related records</div></div>
+            <div class="toggle-switch active" onclick="this.classList.toggle('active')"></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function toggleSettingsSection(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+// ============ USER MENU ============
+function toggleUserMenu() {
+  showToast('User: Jamie Mitchell | Role: Sales Manager', 'info');
+}
+
+// ============ INIT ============
+loadStore();
+updateCounts();
+renderModule('Leads');
+
+// Close modal on overlay click
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+// Close modal on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeModal(); closeDetail(); }
+});
+</script>
+</body>
+</html>
