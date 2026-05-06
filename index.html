@@ -1025,7 +1025,7 @@ tr:hover .row-actions{opacity:1}
         </div>
         <div class="gs-result" onclick="closeGlobalSearch();openRecordPage('Deals','D001')">
           <div class="ri" style="background:#2e7d32"><i class="fas fa-handshake"></i></div>
-          <div class="ri-info"><div class="ri-name">SolarTech Industries - 50kW</div><div class="ri-meta">Deal · ₹18,50,000</div></div>
+          <div class="ri-info"><div class="ri-name">SolarTech Industries - 50kW</div><div class="ri-meta">Deal · Rs18,50,000</div></div>
           <div class="ri-mod">Deals</div>
         </div>
       </div>
@@ -1046,7 +1046,7 @@ tr:hover .row-actions{opacity:1}
       <div class="ni-icon" style="background:#e8f5e9;color:#2e7d32"><i class="fas fa-check-circle"></i></div>
       <div class="ni-body">
         <div class="ni-title">Deal closed successfully!</div>
-        <div class="ni-desc">SolarTech Industries deal worth ₹45,00,000 is now Closed Won</div>
+        <div class="ni-desc">SolarTech Industries deal worth Rs45,00,000 is now Closed Won</div>
         <div class="ni-time">2 minutes ago</div>
       </div>
       <div class="ni-dot"></div>
@@ -1161,14 +1161,14 @@ function getStore() {
   if (d) return JSON.parse(d);
   return {
     Leads: [
-      {id:'L001',First_Name:'Rajesh',Last_Name:'Patel',Company:'SolarTech Industries',Email:'rajesh.patel@solartech.in',Phone:'+91-9876543210',Lead_Status:'Unqualified',Lead_Source:'Website',Industry:'Solar Energy',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-10',City:'Bangalore',State:'Karnataka',Website:'solartech.in',Annual_Revenue:'₹10 Cr',Description:'Interested in 50kW rooftop solar installation for manufacturing facility.'},
-      {id:'L002',First_Name:'Priya',Last_Name:'Sharma',Company:'Nexus Buildings Pvt Ltd',Email:'priya@nexusbuildings.com',Phone:'+91-9988776655',Lead_Status:'Qualified',Lead_Source:'Referral',Industry:'Real Estate',Rating:'Warm',Owner:'Abhishek Sharma',Created:'2026-04-12',City:'Bangalore',State:'Karnataka',Website:'nexusbuildings.com',Annual_Revenue:'₹50 Cr',Description:'Looking for 200kW rooftop for their new apartment complex.'},
-      {id:'L003',First_Name:'Amit',Last_Name:'Singh',Company:'EcoVolt Systems',Email:'amit.singh@ecovolt.com',Phone:'+91-8765432109',Lead_Status:'Contacted',Lead_Source:'LinkedIn',Industry:'Energy',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-15',City:'Bangalore',State:'Karnataka',Website:'ecovolt.com',Annual_Revenue:'₹5 Cr',Description:'30kW setup for their testing facility.'},
-      {id:'L004',First_Name:'Sunita',Last_Name:'Reddy',Company:'ClearSkies Residential',Email:'sunita@clearskies.co.in',Phone:'+91-7654321098',Lead_Status:'New',Lead_Source:'Website',Industry:'Residential',Rating:'Warm',Owner:'Abhishek Sharma',Created:'2026-04-18',City:'Bangalore',State:'Karnataka',Website:'clearskies.co.in',Annual_Revenue:'₹2 Cr',Description:'Residential rooftop, 15kW for villa project.'},
-      {id:'L005',First_Name:'Vikram',Last_Name:'Mehta',Company:'GreenBuild Constructions',Email:'vikram@greenbuild.co.in',Phone:'+91-6543210987',Lead_Status:'Lost',Lead_Source:'Trade Show',Industry:'Construction',Rating:'Cold',Owner:'Abhishek Sharma',Created:'2026-04-20',City:'Mumbai',State:'Maharashtra',Website:'greenbuild.co.in',Annual_Revenue:'₹100 Cr',Description:'Commercial project, deferred due to budget.'},
-      {id:'L006',First_Name:'Anjali',Last_Name:'Kulkarni',Company:'SunPower Solutions',Email:'anjali@sunpower.in',Phone:'+91-9123456789',Lead_Status:'Qualified',Lead_Source:'Partner',Industry:'Solar Energy',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-22',City:'Pune',State:'Maharashtra',Website:'sunpower.in',Annual_Revenue:'₹25 Cr',Description:'75kW plant for their manufacturing unit.'},
-      {id:'L007',First_Name:'Deepak',Last_Name:'Verma',Company:'Thompson Farm Houses',Email:'deepak@thompsonfarm.in',Phone:'+91-9234567890',Lead_Status:'Contacted',Lead_Source:'Cold Call',Industry:'Agriculture',Rating:'Warm',Owner:'Abhishek Sharma',Created:'2026-04-25',City:'Nashik',State:'Maharashtra',Website:'thompsonfarm.in',Annual_Revenue:'₹1 Cr',Description:'Solar water pump + 15kW for farm house.'},
-      {id:'L008',First_Name:'Kavita',Last_Name:'Nair',Company:'Sunflag Infra Solutions',Email:'kavita@sunflag.in',Phone:'+91-9345678901',Lead_Status:'Unqualified',Lead_Source:'Website',Industry:'Infrastructure',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-28',City:'Bangalore',State:'Karnataka',Website:'sunflag.in',Annual_Revenue:'₹200 Cr',Description:'500kW mega project for their industrial park.'},
+      {id:'L001',First_Name:'Rajesh',Last_Name:'Patel',Company:'SolarTech Industries',Email:'rajesh.patel@solartech.in',Phone:'+91-9876543210',Lead_Status:'Unqualified',Lead_Source:'Website',Industry:'Solar Energy',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-10',City:'Bangalore',State:'Karnataka',Website:'solartech.in',Annual_Revenue:'Rs10 Cr',Description:'Interested in 50kW rooftop solar installation for manufacturing facility.'},
+      {id:'L002',First_Name:'Priya',Last_Name:'Sharma',Company:'Nexus Buildings Pvt Ltd',Email:'priya@nexusbuildings.com',Phone:'+91-9988776655',Lead_Status:'Qualified',Lead_Source:'Referral',Industry:'Real Estate',Rating:'Warm',Owner:'Abhishek Sharma',Created:'2026-04-12',City:'Bangalore',State:'Karnataka',Website:'nexusbuildings.com',Annual_Revenue:'Rs50 Cr',Description:'Looking for 200kW rooftop for their new apartment complex.'},
+      {id:'L003',First_Name:'Amit',Last_Name:'Singh',Company:'EcoVolt Systems',Email:'amit.singh@ecovolt.com',Phone:'+91-8765432109',Lead_Status:'Contacted',Lead_Source:'LinkedIn',Industry:'Energy',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-15',City:'Bangalore',State:'Karnataka',Website:'ecovolt.com',Annual_Revenue:'Rs5 Cr',Description:'30kW setup for their testing facility.'},
+      {id:'L004',First_Name:'Sunita',Last_Name:'Reddy',Company:'ClearSkies Residential',Email:'sunita@clearskies.co.in',Phone:'+91-7654321098',Lead_Status:'New',Lead_Source:'Website',Industry:'Residential',Rating:'Warm',Owner:'Abhishek Sharma',Created:'2026-04-18',City:'Bangalore',State:'Karnataka',Website:'clearskies.co.in',Annual_Revenue:'Rs2 Cr',Description:'Residential rooftop, 15kW for villa project.'},
+      {id:'L005',First_Name:'Vikram',Last_Name:'Mehta',Company:'GreenBuild Constructions',Email:'vikram@greenbuild.co.in',Phone:'+91-6543210987',Lead_Status:'Lost',Lead_Source:'Trade Show',Industry:'Construction',Rating:'Cold',Owner:'Abhishek Sharma',Created:'2026-04-20',City:'Mumbai',State:'Maharashtra',Website:'greenbuild.co.in',Annual_Revenue:'Rs100 Cr',Description:'Commercial project, deferred due to budget.'},
+      {id:'L006',First_Name:'Anjali',Last_Name:'Kulkarni',Company:'SunPower Solutions',Email:'anjali@sunpower.in',Phone:'+91-9123456789',Lead_Status:'Qualified',Lead_Source:'Partner',Industry:'Solar Energy',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-22',City:'Pune',State:'Maharashtra',Website:'sunpower.in',Annual_Revenue:'Rs25 Cr',Description:'75kW plant for their manufacturing unit.'},
+      {id:'L007',First_Name:'Deepak',Last_Name:'Verma',Company:'Thompson Farm Houses',Email:'deepak@thompsonfarm.in',Phone:'+91-9234567890',Lead_Status:'Contacted',Lead_Source:'Cold Call',Industry:'Agriculture',Rating:'Warm',Owner:'Abhishek Sharma',Created:'2026-04-25',City:'Nashik',State:'Maharashtra',Website:'thompsonfarm.in',Annual_Revenue:'Rs1 Cr',Description:'Solar water pump + 15kW for farm house.'},
+      {id:'L008',First_Name:'Kavita',Last_Name:'Nair',Company:'Sunflag Infra Solutions',Email:'kavita@sunflag.in',Phone:'+91-9345678901',Lead_Status:'Unqualified',Lead_Source:'Website',Industry:'Infrastructure',Rating:'Hot',Owner:'Abhishek Sharma',Created:'2026-04-28',City:'Bangalore',State:'Karnataka',Website:'sunflag.in',Annual_Revenue:'Rs200 Cr',Description:'500kW mega project for their industrial park.'},
     ],
     Contacts: [
       {id:'C001',First_Name:'Rajesh',Last_Name:'Kumar',Account_Name:'SolarTech Industries',Email:'rajesh.kumar@solartech.in',Phone:'+91-9876543211',Title:'Facility Manager',Department:'Operations',Owner:'Abhishek Sharma',Created:'2026-04-10'},
@@ -1181,24 +1181,24 @@ function getStore() {
       {id:'C008',First_Name:'Emily',Last_Name:'Rodriguez',Account_Name:'Sunflag Infra Solutions',Email:'emily.r@sunflag.in',Phone:'+91-9345678902',Title:'Procurement Head',Department:'Procurement',Owner:'Abhishek Sharma',Created:'2026-04-28'},
     ],
     Accounts: [
-      {id:'A001',Account_Name:'SolarTech Industries',Website:'solartech.in',Industry:'Solar Energy',Employee_Count:'50-100',Annual_Revenue:'₹10 Cr',Phone:'+91-80-12345678',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-10'},
-      {id:'A002',Account_Name:'Nexus Buildings Pvt Ltd',Website:'nexusbuildings.com',Industry:'Real Estate',Employee_Count:'200-500',Annual_Revenue:'₹50 Cr',Phone:'+91-80-23456789',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-12'},
-      {id:'A003',Account_Name:'EcoVolt Systems',Website:'ecovolt.com',Industry:'Energy',Employee_Count:'20-50',Annual_Revenue:'₹5 Cr',Phone:'+91-80-34567890',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-15'},
-      {id:'A004',Account_Name:'ClearSkies Residential',Website:'clearskies.co.in',Industry:'Residential',Employee_Count:'10-20',Annual_Revenue:'₹2 Cr',Phone:'+91-80-45678901',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-18'},
-      {id:'A005',Account_Name:'GreenBuild Constructions',Website:'greenbuild.co.in',Industry:'Construction',Employee_Count:'100-500',Annual_Revenue:'₹100 Cr',Phone:'+91-80-56789012',Owner:'Abhishek Sharma',Billing_City:'Mumbai',Created:'2026-04-20'},
-      {id:'A006',Account_Name:'SunPower Solutions',Website:'sunpower.in',Industry:'Solar Energy',Employee_Count:'100-200',Annual_Revenue:'₹25 Cr',Phone:'+91-20-67890123',Owner:'Abhishek Sharma',Billing_City:'Pune',Created:'2026-04-22'},
-      {id:'A007',Account_Name:'Thompson Farm Houses',Website:'thompsonfarm.in',Industry:'Agriculture',Employee_Count:'5-10',Annual_Revenue:'₹1 Cr',Phone:'+91-253-78901234',Owner:'Abhishek Sharma',Billing_City:'Nashik',Created:'2026-04-25'},
-      {id:'A008',Account_Name:'Sunflag Infra Solutions',Website:'sunflag.in',Industry:'Infrastructure',Employee_Count:'500+',Annual_Revenue:'₹200 Cr',Phone:'+91-80-89012345',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-28'},
+      {id:'A001',Account_Name:'SolarTech Industries',Website:'solartech.in',Industry:'Solar Energy',Employee_Count:'50-100',Annual_Revenue:'Rs10 Cr',Phone:'+91-80-12345678',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-10'},
+      {id:'A002',Account_Name:'Nexus Buildings Pvt Ltd',Website:'nexusbuildings.com',Industry:'Real Estate',Employee_Count:'200-500',Annual_Revenue:'Rs50 Cr',Phone:'+91-80-23456789',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-12'},
+      {id:'A003',Account_Name:'EcoVolt Systems',Website:'ecovolt.com',Industry:'Energy',Employee_Count:'20-50',Annual_Revenue:'Rs5 Cr',Phone:'+91-80-34567890',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-15'},
+      {id:'A004',Account_Name:'ClearSkies Residential',Website:'clearskies.co.in',Industry:'Residential',Employee_Count:'10-20',Annual_Revenue:'Rs2 Cr',Phone:'+91-80-45678901',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-18'},
+      {id:'A005',Account_Name:'GreenBuild Constructions',Website:'greenbuild.co.in',Industry:'Construction',Employee_Count:'100-500',Annual_Revenue:'Rs100 Cr',Phone:'+91-80-56789012',Owner:'Abhishek Sharma',Billing_City:'Mumbai',Created:'2026-04-20'},
+      {id:'A006',Account_Name:'SunPower Solutions',Website:'sunpower.in',Industry:'Solar Energy',Employee_Count:'100-200',Annual_Revenue:'Rs25 Cr',Phone:'+91-20-67890123',Owner:'Abhishek Sharma',Billing_City:'Pune',Created:'2026-04-22'},
+      {id:'A007',Account_Name:'Thompson Farm Houses',Website:'thompsonfarm.in',Industry:'Agriculture',Employee_Count:'5-10',Annual_Revenue:'Rs1 Cr',Phone:'+91-253-78901234',Owner:'Abhishek Sharma',Billing_City:'Nashik',Created:'2026-04-25'},
+      {id:'A008',Account_Name:'Sunflag Infra Solutions',Website:'sunflag.in',Industry:'Infrastructure',Employee_Count:'500+',Annual_Revenue:'Rs200 Cr',Phone:'+91-80-89012345',Owner:'Abhishek Sharma',Billing_City:'Bangalore',Created:'2026-04-28'},
     ],
     Deals: [
-      {id:'D001',Deal_Name:'SolarTech Industries - 50kW Installation',Account_Name:'SolarTech Industries',Amount:'₹18,50,000',Stage:'Negotiation',Closing_Date:'2026-05-30',Probability:'75%',Lead_Source:'Website',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-10',Description:'Complete rooftop 50kW installation with REC 400W panels and SolarEdge inverter.'},
-      {id:'D002',Deal_Name:'Nexus Buildings - 200kW Rooftop',Account_Name:'Nexus Buildings Pvt Ltd',Amount:'₹74,00,000',Stage:'Proposal',Closing_Date:'2026-06-15',Probability:'60%',Lead_Source:'Referral',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-12',Description:'Large 200kW rooftop project for apartment complex.'},
-      {id:'D003',Deal_Name:'EcoVolt Systems - 30kW Setup',Account_Name:'EcoVolt Systems',Amount:'₹11,10,000',Stage:'Qualification',Closing_Date:'2026-06-30',Probability:'40%',Lead_Source:'LinkedIn',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-15',Description:'30kW for testing facility with battery backup.'},
-      {id:'D004',Deal_Name:'ClearSkies Residential Complex',Account_Name:'ClearSkies Residential',Amount:'₹5,55,000',Stage:'Closed Won',Closing_Date:'2026-04-25',Probability:'100%',Lead_Source:'Website',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-18',Description:'Residential villa rooftop installation.'},
-      {id:'D005',Deal_Name:'GreenBuild - 100kW Commercial',Account_Name:'GreenBuild Constructions',Amount:'₹37,00,000',Stage:'Closed Lost',Closing_Date:'2026-04-30',Probability:'0%',Lead_Source:'Trade Show',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-20',Description:'Commercial project deferred due to budget cuts.'},
-      {id:'D006',Deal_Name:'SunPower Solutions - 75kW Plant',Account_Name:'SunPower Solutions',Amount:'₹27,75,000',Stage:'Needs Analysis',Closing_Date:'2026-07-15',Probability:'30%',Lead_Source:'Partner',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-22',Description:'75kW solar plant for manufacturing facility.'},
-      {id:'D007',Deal_Name:'Thompson Farm - 15kW Solar Pump',Account_Name:'Thompson Farm Houses',Amount:'₹2,22,000',Stage:'Closed Won',Closing_Date:'2026-05-05',Probability:'100%',Lead_Source:'Cold Call',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-25',Description:'Solar water pump plus 15kW rooftop.'},
-      {id:'D008',Deal_Name:'Sunflag Infra - 500kW Mega Project',Account_Name:'Sunflag Infra Solutions',Amount:'₹1,85,00,000',Stage:'Prospecting',Closing_Date:'2026-08-30',Probability:'20%',Lead_Source:'Website',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-28',Description:'Massive 500kW installation for industrial park.'},
+      {id:'D001',Deal_Name:'SolarTech Industries - 50kW Installation',Account_Name:'SolarTech Industries',Amount:'Rs18,50,000',Stage:'Negotiation',Closing_Date:'2026-05-30',Probability:'75%',Lead_Source:'Website',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-10',Description:'Complete rooftop 50kW installation with REC 400W panels and SolarEdge inverter.'},
+      {id:'D002',Deal_Name:'Nexus Buildings - 200kW Rooftop',Account_Name:'Nexus Buildings Pvt Ltd',Amount:'Rs74,00,000',Stage:'Proposal',Closing_Date:'2026-06-15',Probability:'60%',Lead_Source:'Referral',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-12',Description:'Large 200kW rooftop project for apartment complex.'},
+      {id:'D003',Deal_Name:'EcoVolt Systems - 30kW Setup',Account_Name:'EcoVolt Systems',Amount:'Rs11,10,000',Stage:'Qualification',Closing_Date:'2026-06-30',Probability:'40%',Lead_Source:'LinkedIn',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-15',Description:'30kW for testing facility with battery backup.'},
+      {id:'D004',Deal_Name:'ClearSkies Residential Complex',Account_Name:'ClearSkies Residential',Amount:'Rs5,55,000',Stage:'Closed Won',Closing_Date:'2026-04-25',Probability:'100%',Lead_Source:'Website',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-18',Description:'Residential villa rooftop installation.'},
+      {id:'D005',Deal_Name:'GreenBuild - 100kW Commercial',Account_Name:'GreenBuild Constructions',Amount:'Rs37,00,000',Stage:'Closed Lost',Closing_Date:'2026-04-30',Probability:'0%',Lead_Source:'Trade Show',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-20',Description:'Commercial project deferred due to budget cuts.'},
+      {id:'D006',Deal_Name:'SunPower Solutions - 75kW Plant',Account_Name:'SunPower Solutions',Amount:'Rs27,75,000',Stage:'Needs Analysis',Closing_Date:'2026-07-15',Probability:'30%',Lead_Source:'Partner',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-22',Description:'75kW solar plant for manufacturing facility.'},
+      {id:'D007',Deal_Name:'Thompson Farm - 15kW Solar Pump',Account_Name:'Thompson Farm Houses',Amount:'Rs2,22,000',Stage:'Closed Won',Closing_Date:'2026-05-05',Probability:'100%',Lead_Source:'Cold Call',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-25',Description:'Solar water pump plus 15kW rooftop.'},
+      {id:'D008',Deal_Name:'Sunflag Infra - 500kW Mega Project',Account_Name:'Sunflag Infra Solutions',Amount:'Rs1,85,00,000',Stage:'Prospecting',Closing_Date:'2026-08-30',Probability:'20%',Lead_Source:'Website',Type:'New Business',Owner:'Abhishek Sharma',Created:'2026-04-28',Description:'Massive 500kW installation for industrial park.'},
     ],
     Activities: [
       {id:'ACT001',Subject:'Follow up on SolarTech proposal',Type:'Task',Related_Module:'Deals',Related_Id:'D001',Due_Date:'2026-05-07',Status:'Not Started',Priority:'High',Assigned_To:'Abhishek Sharma',Description:'Review proposal and answer technical questions',Location:'',Duration:'30 min',Created:'2026-05-05'},
@@ -1213,34 +1213,34 @@ function getStore() {
       {id:'ACT010',Subject:'WhatsApp: Nexus Buildings follow-up',Type:'WhatsApp',Related_Module:'Deals',Related_Id:'D002',Due_Date:'2026-05-05',Status:'Completed',Priority:'Medium',Assigned_To:'Abhishek Sharma',Description:'Sent meeting agenda via WhatsApp',Location:'',Duration:'',Created:'2026-05-05'},
     ],
     Campaigns: [
-      {id:'CAMP001',Campaign_Name:'Summer Solar Drive 2026',Type:'Banner Ads',Status:'Active',Start_Date:'2026-04-01',End_Date:'2026-06-30',Budget:'₹5,00,000',Expected_Revenue:'₹50,00,000',Leads_Created:'45',Converted_Leads:'12',Owner:'Abhishek Sharma'},
-      {id:'CAMP002',Campaign_Name:'Commercial Outreach - Bangalore',Type:'Trade Show',Status:'Planning',Start_Date:'2026-05-15',End_Date:'2026-05-17',Budget:'₹2,00,000',Expected_Revenue:'₹25,00,000',Leads_Created:'0',Converted_Leads:'0',Owner:'Abhishek Sharma'},
-      {id:'CAMP003',Campaign_Name:'Residential Rooftop Campaign',Type:'Email',Status:'Active',Start_Date:'2026-03-01',End_Date:'2026-05-31',Budget:'₹1,00,000',Expected_Revenue:'₹15,00,000',Leads_Created:'28',Converted_Leads:'8',Owner:'Abhishek Sharma'},
-      {id:'CAMP004',Campaign_Name:'Partner Referral Program',Type:'Referral',Status:'Active',Start_Date:'2026-01-01',End_Date:'2026-12-31',Budget:'₹3,00,000',Expected_Revenue:'₹75,00,000',Leads_Created:'62',Converted_Leads:'18',Owner:'Abhishek Sharma'},
-      {id:'CAMP005',Campaign_Name:'Industrial Solar Expo 2026',Type:'Trade Show',Status:'Completed',Start_Date:'2026-02-10',End_Date:'2026-02-12',Budget:'₹4,00,000',Expected_Revenue:'₹40,00,000',Leads_Created:'89',Converted_Leads:'22',Owner:'Abhishek Sharma'},
+      {id:'CAMP001',Campaign_Name:'Summer Solar Drive 2026',Type:'Banner Ads',Status:'Active',Start_Date:'2026-04-01',End_Date:'2026-06-30',Budget:'Rs5,00,000',Expected_Revenue:'Rs50,00,000',Leads_Created:'45',Converted_Leads:'12',Owner:'Abhishek Sharma'},
+      {id:'CAMP002',Campaign_Name:'Commercial Outreach - Bangalore',Type:'Trade Show',Status:'Planning',Start_Date:'2026-05-15',End_Date:'2026-05-17',Budget:'Rs2,00,000',Expected_Revenue:'Rs25,00,000',Leads_Created:'0',Converted_Leads:'0',Owner:'Abhishek Sharma'},
+      {id:'CAMP003',Campaign_Name:'Residential Rooftop Campaign',Type:'Email',Status:'Active',Start_Date:'2026-03-01',End_Date:'2026-05-31',Budget:'Rs1,00,000',Expected_Revenue:'Rs15,00,000',Leads_Created:'28',Converted_Leads:'8',Owner:'Abhishek Sharma'},
+      {id:'CAMP004',Campaign_Name:'Partner Referral Program',Type:'Referral',Status:'Active',Start_Date:'2026-01-01',End_Date:'2026-12-31',Budget:'Rs3,00,000',Expected_Revenue:'Rs75,00,000',Leads_Created:'62',Converted_Leads:'18',Owner:'Abhishek Sharma'},
+      {id:'CAMP005',Campaign_Name:'Industrial Solar Expo 2026',Type:'Trade Show',Status:'Completed',Start_Date:'2026-02-10',End_Date:'2026-02-12',Budget:'Rs4,00,000',Expected_Revenue:'Rs40,00,000',Leads_Created:'89',Converted_Leads:'22',Owner:'Abhishek Sharma'},
     ],
     Products: [
-      {id:'P001',Product_Name:'REC 400W Alpha Series Panel',Product_Code:'REC-ALPHA-400',Category:'Solar Panels',Unit_Price:'₹28,000',Manufacturer:'REC Solar',Qty_Ordered:'250',Product_Active:'true',Description:'High-efficiency mono PERC panel, 400W output'},
-      {id:'P002',Product_Name:'SolarEdge 10kW Inverter',Product_Code:'SE-INV-10K',Category:'Inverters',Unit_Price:'₹85,000',Manufacturer:'SolarEdge',Qty_Ordered:'15',Product_Active:'true',Description:'Smart inverter with power optimization'},
-      {id:'P003',Product_Name:'LG NeON R 385W Panel',Product_Code:'LG-NEON-385',Category:'Solar Panels',Unit_Price:'₹26,500',Manufacturer:'LG Electronics',Qty_Ordered:'180',Product_Active:'true',Description:'Premium rooftop solar panel, 25-year warranty'},
-      {id:'P004',Product_Name:'Solar Mounting Structure',Product_Code:'MOUNT-RT-STD',Category:'Mounting',Unit_Price:'₹4,500',Manufacturer:'Local',Qty_Ordered:'500',Product_Active:'true',Description:'Galvanized steel rooftop mounting structure'},
-      {id:'P005',Product_Name:'BYD Battery Storage 10kWh',Product_Code:'BYD-BAT-10K',Category:'Storage',Unit_Price:'₹1,50,000',Manufacturer:'BYD',Qty_Ordered:'8',Product_Active:'true',Description:'LFP battery storage system, 10kWh capacity'},
-      {id:'P006',Product_Name:'Enphase IQ8+ Microinverter',Product_Code:'ENP-IQ8P',Category:'Inverters',Unit_Price:'₹8,500',Manufacturer:'Enphase',Qty_Ordered:'120',Product_Active:'true',Description:'Microinverter with 99% efficiency'},
-      {id:'P007',Product_Name:'ABB String Combiner Box',Product_Code:'ABB-CMB-40A',Category:'Electrical',Unit_Price:'₹12,000',Manufacturer:'ABB',Qty_Ordered:'25',Product_Active:'true',Description:'40A string combiner box with fuses'},
-      {id:'P008',Product_Name:'Installation Service - Per kW',Product_Code:'INST-KW',Category:'Services',Unit_Price:'₹8,000',Manufacturer:'',Qty_Ordered:'0',Product_Active:'true',Description:'Professional installation service per kW capacity'},
+      {id:'P001',Product_Name:'REC 400W Alpha Series Panel',Product_Code:'REC-ALPHA-400',Category:'Solar Panels',Unit_Price:'Rs28,000',Manufacturer:'REC Solar',Qty_Ordered:'250',Product_Active:'true',Description:'High-efficiency mono PERC panel, 400W output'},
+      {id:'P002',Product_Name:'SolarEdge 10kW Inverter',Product_Code:'SE-INV-10K',Category:'Inverters',Unit_Price:'Rs85,000',Manufacturer:'SolarEdge',Qty_Ordered:'15',Product_Active:'true',Description:'Smart inverter with power optimization'},
+      {id:'P003',Product_Name:'LG NeON R 385W Panel',Product_Code:'LG-NEON-385',Category:'Solar Panels',Unit_Price:'Rs26,500',Manufacturer:'LG Electronics',Qty_Ordered:'180',Product_Active:'true',Description:'Premium rooftop solar panel, 25-year warranty'},
+      {id:'P004',Product_Name:'Solar Mounting Structure',Product_Code:'MOUNT-RT-STD',Category:'Mounting',Unit_Price:'Rs4,500',Manufacturer:'Local',Qty_Ordered:'500',Product_Active:'true',Description:'Galvanized steel rooftop mounting structure'},
+      {id:'P005',Product_Name:'BYD Battery Storage 10kWh',Product_Code:'BYD-BAT-10K',Category:'Storage',Unit_Price:'Rs1,50,000',Manufacturer:'BYD',Qty_Ordered:'8',Product_Active:'true',Description:'LFP battery storage system, 10kWh capacity'},
+      {id:'P006',Product_Name:'Enphase IQ8+ Microinverter',Product_Code:'ENP-IQ8P',Category:'Inverters',Unit_Price:'Rs8,500',Manufacturer:'Enphase',Qty_Ordered:'120',Product_Active:'true',Description:'Microinverter with 99% efficiency'},
+      {id:'P007',Product_Name:'ABB String Combiner Box',Product_Code:'ABB-CMB-40A',Category:'Electrical',Unit_Price:'Rs12,000',Manufacturer:'ABB',Qty_Ordered:'25',Product_Active:'true',Description:'40A string combiner box with fuses'},
+      {id:'P008',Product_Name:'Installation Service - Per kW',Product_Code:'INST-KW',Category:'Services',Unit_Price:'Rs8,000',Manufacturer:'',Qty_Ordered:'0',Product_Active:'true',Description:'Professional installation service per kW capacity'},
     ],
     Quotes: [
-      {id:'Q001',Subject:'SolarTech Industries - 50kW Quote',Related_Deal:'D001',Account_Name:'SolarTech Industries',Valid_Till:'2026-06-30',Quantity:'1',List_Price:'₹18,50,000',Discount:'5%',Terms:'Net 30 days',Status:'Sent',Owner:'Abhishek Sharma'},
-      {id:'Q002',Subject:'Nexus Buildings - 200kW Proposal',Related_Deal:'D002',Account_Name:'Nexus Buildings Pvt Ltd',Valid_Till:'2026-07-15',Quantity:'1',List_Price:'₹74,00,000',Discount:'8%',Terms:'Net 45 days',Status:'Draft',Owner:'Abhishek Sharma'},
-      {id:'Q003',Subject:'EcoVolt - 30kW Initial Quote',Related_Deal:'D003',Account_Name:'EcoVolt Systems',Valid_Till:'2026-07-01',Quantity:'1',List_Price:'₹11,10,000',Discount:'3%',Terms:'Net 30 days',Status:'Sent',Owner:'Abhishek Sharma'},
-      {id:'Q004',Subject:'ClearSkies Residential - Final',Related_Deal:'D004',Account_Name:'ClearSkies Residential',Valid_Till:'2026-05-25',Quantity:'1',List_Price:'₹5,55,000',Discount:'10%',Terms:'Net 15 days',Status:'Accepted',Owner:'Abhishek Sharma'},
-      {id:'Q005',Subject:'SunPower - 75kW Comprehensive',Related_Deal:'D006',Account_Name:'SunPower Solutions',Valid_Till:'2026-08-01',Quantity:'1',List_Price:'₹27,75,000',Discount:'6%',Terms:'Net 30 days',Status:'Draft',Owner:'Abhishek Sharma'},
+      {id:'Q001',Subject:'SolarTech Industries - 50kW Quote',Related_Deal:'D001',Account_Name:'SolarTech Industries',Valid_Till:'2026-06-30',Quantity:'1',List_Price:'Rs18,50,000',Discount:'5%',Terms:'Net 30 days',Status:'Sent',Owner:'Abhishek Sharma'},
+      {id:'Q002',Subject:'Nexus Buildings - 200kW Proposal',Related_Deal:'D002',Account_Name:'Nexus Buildings Pvt Ltd',Valid_Till:'2026-07-15',Quantity:'1',List_Price:'Rs74,00,000',Discount:'8%',Terms:'Net 45 days',Status:'Draft',Owner:'Abhishek Sharma'},
+      {id:'Q003',Subject:'EcoVolt - 30kW Initial Quote',Related_Deal:'D003',Account_Name:'EcoVolt Systems',Valid_Till:'2026-07-01',Quantity:'1',List_Price:'Rs11,10,000',Discount:'3%',Terms:'Net 30 days',Status:'Sent',Owner:'Abhishek Sharma'},
+      {id:'Q004',Subject:'ClearSkies Residential - Final',Related_Deal:'D004',Account_Name:'ClearSkies Residential',Valid_Till:'2026-05-25',Quantity:'1',List_Price:'Rs5,55,000',Discount:'10%',Terms:'Net 15 days',Status:'Accepted',Owner:'Abhishek Sharma'},
+      {id:'Q005',Subject:'SunPower - 75kW Comprehensive',Related_Deal:'D006',Account_Name:'SunPower Solutions',Valid_Till:'2026-08-01',Quantity:'1',List_Price:'Rs27,75,000',Discount:'6%',Terms:'Net 30 days',Status:'Draft',Owner:'Abhishek Sharma'},
     ],
     // Custom fields/notes per record stored separately
     Notes: [
-      {id:'N001',Module:'Leads',Record_Id:'L001',Body:'Initial call completed. Prospect is very interested in 50kW rooftop. Prefers REC panels over LG. Decision maker identified as Rajesh Kumar. Budget approved at ₹20L. Follow-up scheduled for next week.','Author':'Abhishek Sharma','Created':'2026-04-10'},
-      {id:'N002',Module:'Leads',Record_Id:'L001',Body:'AI Summary: Discussed technical requirements for 50kW rooftop. Key points: South-facing roof available, open access. Concerns: limited shadow analysis needed. Next: Send detailed proposal with 3 options.','Author':'AI Agent','Created:'2026-04-15'},
-      {id:'N003',Module:'Deals',Record_Id:'D001',Body:'Proposal sent. Customer requested minor modifications - changed inverter from SolarEdge to Huawei. Revised amount: ₹18,50,000. Waiting for approval from their engineering team.','Author':'Abhishek Sharma','Created:'2026-04-20'},
+      {id:'N001',Module:'Leads',Record_Id:'L001',Body:"Initial call completed. Prospect very interested in 50kW rooftop. Prefers REC panels over LG. Decision maker identified. Budget approved at Rs20L. Follow-up scheduled.",Author:'Abhishek Sharma',Created:'2026-04-10'},
+      {id:'N002',Module:'Leads',Record_Id:'L001',Body:"AI Summary: Discussed technical requirements for 50kW rooftop. Key points: South-facing roof available, open access. Concerns: limited shadow analysis needed. Next: Send detailed proposal with 3 options.",Author:'AI Agent',Created:'2026-04-15'},
+      {id:'N003',Module:'Deals',Record_Id:'D001',Body:"Proposal sent. Customer requested minor modifications - changed inverter from SolarEdge to Huawei. Revised amount: Rs18,50,000. Waiting for approval.",Author:'Abhishek Sharma',Created:'2026-04-20'},
     ],
     // Custom modules (from settings)
     CustomModules: [
@@ -2024,7 +2024,7 @@ function renderDash(main) {
         <div class="dash-welcome-stats">
           <div class="dash-welcome-stat"><div class="num">${leads.length}</div><div class="lbl">Total Leads</div></div>
           <div class="dash-welcome-stat"><div class="num">${openDeals.length}</div><div class="lbl">Open Deals</div></div>
-          <div class="dash-welcome-stat"><div class="num">₹${(totalRevenue/100000).toFixed(1)}L</div><div class="lbl">Won Revenue</div></div>
+          <div class="dash-welcome-stat"><div class="num">Rs${(totalRevenue/100000).toFixed(1)}L</div><div class="lbl">Won Revenue</div></div>
         </div>
       </div>
 
@@ -2041,8 +2041,8 @@ function renderDash(main) {
 
       <div class="dgrid4">
         ${[{icon:'fa-user',label:'Total Leads',val:leads.length,sub:`${hotLeads} hot`,up:true,color:'#e8a838'},
-          {icon:'fa-handshake',label:'Pipeline Value',val:'₹'+(pipeline/100000).toFixed(1)+'L',sub:`${openDeals.length} open deals`,up:true,color:'#2e7d32'},
-          {icon:'fa-rupee-sign',label:'Revenue (Won)',val:'₹'+(totalRevenue/100000).toFixed(1)+'L',sub:`${wonDeals.length} closed won`,up:totalRevenue>0,color:'#294a85'},
+          {icon:'fa-handshake',label:'Pipeline Value',val:'Rs'+(pipeline/100000).toFixed(1)+'L',sub:`${openDeals.length} open deals`,up:true,color:'#2e7d32'},
+          {icon:'fa-rupee-sign',label:'Revenue (Won)',val:'Rs'+(totalRevenue/100000).toFixed(1)+'L',sub:`${wonDeals.length} closed won`,up:totalRevenue>0,color:'#294a85'},
           {icon:'fa-bullhorn',label:'Active Campaigns',val:(store.Campaigns||[]).filter(c=>c.Status==='Active').length,sub:'4 running',up:true,color:'#d63384'}
         ].map(s=>`
           <div class="dscard">
@@ -2161,8 +2161,8 @@ function renderReport(main) {
     new Chart(document.getElementById('rptLeads'), {type:'bar',data:{labels:Object.keys(sMap),datasets:[{label:'Leads',data:Object.values(sMap),backgroundColor:'#294a85'}]},options:{responsive:true,plugins:{legend:{display:false}}}});
     const wl={Won:(store.Deals||[]).filter(d=>d.Stage==='Closed Won').length,Lost:(store.Deals||[]).filter(d=>d.Stage==='Closed Lost').length};
     new Chart(document.getElementById('rptWinLoss'), {type:'doughnut',data:{labels:Object.keys(wl),datasets:[{data:Object.values(wl),backgroundColor:['#2e7d32','#c62828'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
-    new Chart(document.getElementById('rptPipeline'), {type:'line',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Pipeline (₹L)',data:[10,15,22,18,28],borderColor:'#294a85',fill:false,tension:.4}]},options:{responsive:true}});
-    new Chart(document.getElementById('rptRevenue'), {type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Revenue (₹L)',data:[5,8,12,7,15],backgroundColor:'#e8a838'}]},options:{responsive:true,plugins:{legend:{display:false}}}});
+    new Chart(document.getElementById('rptPipeline'), {type:'line',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Pipeline (RsL)',data:[10,15,22,18,28],borderColor:'#294a85',fill:false,tension:.4}]},options:{responsive:true}});
+    new Chart(document.getElementById('rptRevenue'), {type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{label:'Revenue (RsL)',data:[5,8,12,7,15],backgroundColor:'#e8a838'}]},options:{responsive:true,plugins:{legend:{display:false}}}});
   }, 100);
 }
 
@@ -2281,7 +2281,7 @@ function showSettingsTab(tab, el) {
         </div>
         <div class="srow">
           <div class="sl"><div class="sn">Default Currency</div><div class="sd">Currency for new deals and quotes</div></div>
-          <select style="padding:6px 10px;border:1px solid var(--border);border-radius:4px"><option selected>INR (₹)</option><option>USD ($)</option><option>EUR (€)</option></select>
+          <select style="padding:6px 10px;border:1px solid var(--border);border-radius:4px"><option selected>INR (Rs)</option><option>USD ($)</option><option>EUR (€)</option></select>
         </div>
         <div class="srow">
           <div class="sl"><div class="sn">Date Format</div><div class="sd">Display format for dates</div></div>
@@ -2709,7 +2709,7 @@ function openConvertLead(id) {
           <p>Solar installation opportunity</p>
           <div class="clm-fields">
             <input placeholder="Deal Name" value="${lead.Company||'Solar Project'}">
-            <input placeholder="Amount" value="₹5,00,000">
+            <input placeholder="Amount" value="Rs5,00,000">
           </div>
         </div>
       </div>
@@ -2965,7 +2965,7 @@ function getAIResponse(msg, store) {
   if (lc.includes('pipeline')||lc.includes('summarize')) {
     const open = deals.filter(d=>!['Closed Won','Closed Lost'].includes(d.Stage));
     const total = open.reduce((s,d)=>s+parseInt((d.Amount||'0').replace(/[^0-9]/g,'')),0);
-    return {text:`Current pipeline summary:\n• ${open.length} open deals worth ₹${(total/100000).toFixed(1)}L\n• ${deals.filter(d=>d.Stage==='Negotiation').length} in Negotiation\n• ${deals.filter(d=>d.Stage==='Proposal').length} with active Proposals\n• ${deals.filter(d=>d.Stage==='Closed Won').length} won this month`,actions:['Show top deals','Find stale deals','Draft follow-up email']};
+    return {text:`Current pipeline summary:\n• ${open.length} open deals worth Rs${(total/100000).toFixed(1)}L\n• ${deals.filter(d=>d.Stage==='Negotiation').length} in Negotiation\n• ${deals.filter(d=>d.Stage==='Proposal').length} with active Proposals\n• ${deals.filter(d=>d.Stage==='Closed Won').length} won this month`,actions:['Show top deals','Find stale deals','Draft follow-up email']};
   }
   if (lc.includes('email')||lc.includes('draft')) {
     return {text:`I'll draft a follow-up email for you. Based on the activity history, I recommend:\n\nSubject: Following up on your solar proposal\n\nHi [Name],\nI wanted to follow up on the solar installation proposal I sent last week. Do you have any questions about the specifications or pricing?\n\nShall I send this to specific leads? Just say the names and I'll personalize each one.`,actions:['Send to SolarTech','Send to Nexus Buildings','Personalize more']};
@@ -2980,7 +2980,7 @@ function getAIResponse(msg, store) {
   if (lc.includes('deal')||lc.includes('win')||lc.includes('close')) {
     const won = deals.filter(d=>d.Stage==='Closed Won');
     const total = won.reduce((s,d)=>s+parseInt((d.Amount||'0').replace(/[^0-9]/g,'')),0);
-    return {text:`Great news! You've closed ${won.length} deals worth ₹${(total/100000).toFixed(1)}L this period.\n\nTop performers:\n${won.sort((a,b)=>parseInt((b.Amount||'0').replace(/[^0-9]/g,''))-parseInt((a.Amount||'0').replace(/[^0-9]/g,''))).slice(0,3).map((d,i)=>`${i+1}. ${d.Deal_Name} — ${d.Amount}`).join('\n')}`,actions:['Celebrate wins 🎉','Find next opportunities']};
+    return {text:`Great news! You've closed ${won.length} deals worth Rs${(total/100000).toFixed(1)}L this period.\n\nTop performers:\n${won.sort((a,b)=>parseInt((b.Amount||'0').replace(/[^0-9]/g,''))-parseInt((a.Amount||'0').replace(/[^0-9]/g,''))).slice(0,3).map((d,i)=>`${i+1}. ${d.Deal_Name} — ${d.Amount}`).join('\n')}`,actions:['Celebrate wins 🎉','Find next opportunities']};
   }
   // Default
   return {text:`I understand you want to: "${msg}"\n\nAs your AI Sales Agent, I can help you with:\n• Finding and summarizing leads and deals\n• Drafting personalized emails and WhatsApp messages\n• Scheduling meetings and follow-up tasks\n• Pipeline analysis and recommendations\n• Bulk outreach campaigns\n\nWhat would you like me to do?`,actions:['Find hot leads','Summarize pipeline','Draft follow-up email']};
@@ -3072,7 +3072,7 @@ function getPipelineStages(deals) {
     const sDeals = stageList.filter(d=>d.Stage===s);
     const total = sDeals.reduce((ss,dd)=>ss+parseInt((dd.Amount||'0').replace(/[^0-9]/g,'')),0);
     const pct = max>0?Math.round((total/max)*100):0;
-    return `<div class="pl-item"><div class="pl-dot" style="background:${cols[i]}"></div><div class="pl-info"><div class="pl-name">${s}</div><div class="pl-count">${sDeals.length} deals</div></div><div class="pl-bar-wrap"><div class="pl-bar" style="width:${pct}%;background:${cols[i]}"></div></div><div class="pl-amt">₹${(total/100000).toFixed(1)}L</div></div>`;
+    return `<div class="pl-item"><div class="pl-dot" style="background:${cols[i]}"></div><div class="pl-info"><div class="pl-name">${s}</div><div class="pl-count">${sDeals.length} deals</div></div><div class="pl-bar-wrap"><div class="pl-bar" style="width:${pct}%;background:${cols[i]}"></div></div><div class="pl-amt">Rs${(total/100000).toFixed(1)}L</div></div>`;
   }).join('');
 }
 
