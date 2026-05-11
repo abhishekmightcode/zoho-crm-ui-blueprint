@@ -718,6 +718,91 @@ tr:hover .row-actions{opacity:1}
 .mt-8{margin-top:8px}
 .mb-8{margin-bottom:8px}
 .mb-16{margin-bottom:16px}
+
+/* ===== MODULE BUILDER ===== */
+.mb-wrap{min-width:680px}
+.mb-step-bar{display:flex;align-items:center;padding:12px 16px;background:var(--bg);border-bottom:1px solid var(--border);gap:0;margin:-20px -20px 20px -20px}
+.mb-step{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mb-step-num{width:24px;height:24px;border-radius:50%;background:var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:.2s}
+.mb-step.active .mb-step-num{background:var(--blue);color:#fff}
+.mb-step.done .mb-step-num{background:var(--green);color:#fff}
+.mb-step-name{font-size:11px;font-weight:600;color:var(--text2);transition:.2s}
+.mb-step.active .mb-step-name{color:var(--blue)}
+.mb-step.done .mb-step-name{color:var(--green)}
+.mb-step-sub{font-size:10px;color:var(--text3)}
+.mb-line{flex:1;height:2px;background:var(--border);margin:0 8px;min-width:20px}
+.mb-body{min-height:380px}
+.mb-section-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px}
+.mb-foot{padding:10px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.mb-foot-right{display:flex;align-items:center;gap:10px}
+.mb-step-info{font-size:11px;color:var(--text3)}
+
+/* Field palette (Step 2) */
+.mb-field-types{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.mb-ft-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-md);cursor:pointer;transition:.15s;text-align:center}
+.mb-ft-item:hover{border-color:var(--blue);background:rgba(41,74,133,.04);transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,0,0,.08)}
+.mb-ft-icon{width:32px;height:32px;border-radius:var(--r-sm);background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mb-ft-name{font-size:11px;font-weight:700;color:var(--text)}
+.mb-ft-sub{font-size:9px;color:var(--text3);line-height:1.3}
+.mb-added-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:12px;font-weight:600}
+.mb-added-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto;padding-right:4px}
+.mb-added-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:.15s}
+.mb-added-item:hover{border-color:var(--blue)}
+.mb-added-item.sel{border-color:var(--gold);background:rgba(232,168,56,.06)}
+.mb-ai{display:flex;align-items:center;gap:8px;flex:1}
+.mb-ai-icon{width:26px;height:26px;border-radius:var(--r-sm);background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.mb-ai-label{font-size:12px;font-weight:600;color:var(--text)}
+.mb-ai-api{font-size:10px;color:var(--text3);font-family:monospace;margin-top:1px}
+.mb-ai-type{font-size:9px;color:var(--text3);font-style:italic}
+.mb-ai-actions{display:flex;gap:4px}
+.mb-ai-del{width:22px;height:22px;border-radius:3px;border:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--red);cursor:pointer;opacity:0;transition:.15s}
+.mb-added-item:hover .mb-ai-del{opacity:1}
+.mb-ai-del:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.mb-mand{color:var(--red);font-size:9px;margin-left:4px}
+
+/* Field config panel */
+.mb-fc-panel{display:none;margin-top:12px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md)}
+.mb-fc-panel.open{display:block}
+.mb-fc-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.mb-fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mb-fc-full{grid-column:1/-1}
+.mb-fc-actions{display:flex;gap:6px;margin-top:10px;justify-content:flex-end}
+
+/* Review step */
+.mb-review-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.mb-review-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden}
+.mb-review-hdr{padding:8px 12px;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;gap:5px}
+.mb-review-row{display:flex;justify-content:space-between;padding:7px 12px;border-bottom:1px solid var(--border);font-size:11px}
+.mb-review-row:last-child{border-bottom:none}
+.mb-review-row span{color:var(--text3)}
+.mb-review-row b{color:var(--text);font-weight:600}
+.mb-review-fields{}
+.mb-rf-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.mb-rf-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);margin-bottom:5px}
+.mb-rf-item.req{border-left:3px solid var(--red)}
+.mb-rf-n{font-size:10px;color:var(--text3);width:14px;text-align:center}
+.mb-rf-icon{color:var(--blue);font-size:10px}
+.mb-rf-lbl{flex:1;font-size:11px;font-weight:600}
+.mb-rf-api{font-size:9px;color:var(--text3);font-family:monospace}
+.mb-rf-type{font-size:9px;background:var(--border);padding:1px 6px;border-radius:8px;color:var(--text2)}
+.mb-rf-req{font-size:9px;color:var(--red)}
+
+/* Empty state */
+.mb-empty{text-align:center;padding:24px;color:var(--text3);border:2px dashed var(--border);border-radius:var(--r-md);font-size:11px}
+
+/* Layout step */
+.ly-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.ly-col-hdr{padding:7px 10px;background:var(--blue);color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;border-radius:var(--r-sm) var(--r-sm) 0 0;display:flex;align-items:center;gap:5px}
+.ly-col-bdy{min-height:80px;padding:8px;border:2px dashed var(--border);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm);transition:.15s}
+.ly-col-bdy.drag-over{border-color:var(--blue);background:rgba(41,74,133,.03)}
+.ly-col-item{display:flex;align-items:center;gap:5px;padding:4px 8px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);font-size:10px;font-weight:500;margin-bottom:4px;cursor:grab}
+.ly-empty-c{font-size:10px;color:var(--text3);text-align:center;padding:12px 4px}
+.ly-avail{margin-top:10px}
+.ly-avail-hdr{font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px}
+.ly-avail-flds{display:flex;flex-wrap:wrap;gap:4px}
+.ly-avail-fld{padding:3px 8px;background:var(--white);border:1px solid var(--border);border-radius:10px;font-size:10px;cursor:grab;display:flex;align-items:center;gap:4px}
+.ly-avail-fld:hover{border-color:var(--blue);background:rgba(41,74,133,.04)}
+
 </style>
 </head>
 <body>
@@ -2730,33 +2815,462 @@ function openConvertLead(id) {
 
 function openCreateModuleModal() {
   const modal = document.getElementById('modal');
-  modal.className = 'm';
+  modal.className = 'm mb-wrap';
   document.getElementById('mIcon').className = 'fas fa-puzzle-piece mod-icon';
   document.getElementById('mTitle').textContent = 'Create Custom Module';
-  document.getElementById('mBody').innerHTML = `
+  document.getElementById('mBody').innerHTML = buildModuleBuilderHTML(1);
+  document.getElementById('mSaveBtn').style.display = 'none';
+  document.getElementById('modalOverlay').classList.add('open');
+
+  window._mbStep = 1;
+  window._mbFields = [];
+  window._mbLayouts = { header: [], main: [], sidebar: [] };
+  window._mbSelField = null;
+  updateMBSteps();
+}
+
+function buildModuleBuilderHTML(step) {
+  if (step === 1) return MB_STEP1_HTML;
+  if (step === 2) return MB_STEP2_HTML;
+  if (step === 3) return MB_STEP3_HTML;
+  if (step === 4) return MB_STEP4_HTML;
+}
+
+const MB_STEP1_HTML = `
+  <div class="mb-step-bar">
+    <div class="mb-step active" data-step="1"><div class="mb-step-num"><span>1</span></div><div><div class="mb-step-name">Basic Info</div><div class="mb-step-sub">Name & icon</div></div></div>
+    <div class="mb-line"></div>
+    <div class="mb-step" data-step="2"><div class="mb-step-num"><span>2</span></div><div><div class="mb-step-name">Fields</div><div class="mb-step-sub">Build structure</div></div></div>
+    <div class="mb-line"></div>
+    <div class="mb-step" data-step="3"><div class="mb-step-num"><span>3</span></div><div><div class="mb-step-name">Layout</div><div class="mb-step-sub">Assign sections</div></div></div>
+    <div class="mb-line"></div>
+    <div class="mb-step" data-step="4"><div class="mb-step-num"><span>4</span></div><div><div class="mb-step-name">Review</div><div class="mb-step-sub">Confirm</div></div></div>
+  </div>
+  <div class="mb-body">
+    <div class="mb-section-title"><i class="fas fa-info-circle"></i> Step 1 — Basic Information</div>
     <div class="f-grid">
-      <div class="fg full"><label>Module Name <span class="r">*</span></label><input type="text" id="cm-name" placeholder="e.g. Projects, Assets, Vendors"></div>
-      <div class="fg full"><label>Module Label (Singular) <span class="r">*</span></label><input type="text" id="cm-label" placeholder="e.g. Project, Asset, Vendor"></div>
-      <div class="fg full"><label>Module Icon</label>
-        <select id="cm-icon" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%">
-          <option value="fa-box">📦 Box (Default)</option><option value="fa-briefcase">💼 Briefcase</option><option value="fa-car">🚗 Car</option><option value="fa-home">🏠 Home</option><option value="fa-graduation-cap">🎓 Graduation</option><option value="fa-heart">❤️ Heart</option><option value="fa-star">⭐ Star</option>
+      <div class="fg"><label>Module Name <span class="r">*</span></label><input type="text" id="mb-name" placeholder="e.g. Projects" oninput="mbAutoAPI()"><span class="f-placeholder">Used as the module key in records</span></div>
+      <div class="fg"><label>API Name <span class="r">*</span></label><input type="text" id="mb-api" placeholder="e.g. Projects" style="background:#f0f4f8"><span class="f-placeholder">Unique identifier for API calls</span></div>
+      <div class="fg"><label>Module Label <span class="r">*</span></label><input type="text" id="mb-label" placeholder="e.g. Project"><span class="f-placeholder">Shown as record title in the UI</span></div>
+      <div class="fg"><label>Plural Label</label><input type="text" id="mb-plural" placeholder="e.g. Projects"><span class="f-placeholder">Defaults to Module Name</span></div>
+      <div class="fg full"><label>Module Icon & Colour</label><div style="display:flex;gap:10px;align-items:center">
+        <select id="mb-icon" style="padding:8px;border:1px solid var(--border);border-radius:4px;flex:1">
+          <option value="fa-box">📦 Box</option><option value="fa-briefcase">💼 Briefcase</option><option value="fa-car">🚗 Car</option><option value="fa-home">🏠 Home</option>
+          <option value="fa-graduation-cap">🎓 Graduation</option><option value="fa-heart">❤️ Heart</option><option value="fa-star">⭐ Star</option>
+          <option value="fa-wrench">🔧 Wrench</option><option value="fa-cog">⚙️ Gear</option><option value="fa-handshake">🤝 Handshake</option>
+          <option value="fa-file-alt">📄 Document</option><option value="fa-tools">🛠️ Tools</option><option value="fa-solar-panel">☀️ Solar</option>
+          <option value="fa-bolt">⚡ Bolt</option><option value="fa-truck">🚚 Truck</option><option value="fa-clipboard">📋 Clipboard</option>
+        </select>
+        <input type="color" id="mb-color" value="#6f42c1" style="width:40px;height:36px;border:1px solid var(--border);border-radius:4px;cursor:pointer;padding:2px">
+        <span style="font-size:11px;color:var(--text3)">Colour</span>
+      </div></div>
+      <div class="fg"><label>Business Type</label>
+        <select id="mb-btype" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%">
+          <option value="custom">Custom</option><option value="transactions">Transactions</option><option value="master">Master Data</option>
+          <option value="activities">Activities</option><option value="inventory">Inventory</option><option value="support">Support</option>
         </select>
       </div>
+      <div class="fg"><label>Related To</label>
+        <select id="mb-related" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%">
+          <option value="">-- None --</option><option value="Leads">Leads</option><option value="Contacts">Contacts</option>
+          <option value="Accounts">Accounts</option><option value="Deals">Deals</option><option value="Products">Products</option><option value="Quotes">Quotes</option>
+        </select>
+        <span class="f-placeholder">Creates a lookup to another module</span>
+      </div>
     </div>
-  `;
-  document.getElementById('mSaveBtn').innerHTML = '<i class="fas fa-check"></i> Create Module';
-  document.getElementById('mSaveBtn').onclick = () => {
-    const name = document.getElementById('cm-name').value;
-    const label = document.getElementById('cm-label').value;
-    if (!name || !label) { alert('Please fill in required fields'); return; }
-    const store = getStore();
-    if (!store.CustomModules) store.CustomModules = [];
-    store.CustomModules.push({id:'CM'+Date.now(),Module_Name:name,Module_Label:label,Fields:JSON.stringify([]),Created:new Date().toISOString().slice(0,10)});
-    saveStore(store);
-    closeModal();
-    showSettingsTab('modules');
+  </div>
+  <div class="mb-foot">
+    <div></div>
+    <div class="mb-foot-right">
+      <span class="mb-step-info">Step 1 of 4</span>
+      <button class="btn btn-p" onclick="mbNext()">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+`;
+
+const MB_STEP2_HTML = `
+  <div class="mb-body">
+    <div class="mb-section-title"><i class="fas fa-th-large"></i> Step 2 — Add Fields</div>
+    <div class="mb-field-types">
+      ${MB_FIELDTYPES.map(ft=>`<div class="mb-ft-item" onclick="mbAddField('${ft.type}')">
+        <div class="mb-ft-icon"><i class="fas ${ft.icon}"></i></div>
+        <div class="mb-ft-name">${ft.name}</div>
+        <div class="mb-ft-sub">${ft.sub}</div>
+      </div>`).join('')}
+    </div>
+    <div class="mb-added-title">
+      <span>Fields Added (<b id="mbFCount">0</b>)</span>
+    </div>
+    <div class="mb-added-list" id="mbFieldsList">
+      <div class="mb-empty" id="mbEmptyMsg"><i class="fas fa-mouse-pointer"></i><br>Click field types above to add them</div>
+    </div>
+    <div class="mb-fc-panel" id="mbFcPanel">
+      <div class="mb-fc-title"><i class="fas fa-cog"></i> Configure Field</div>
+      <div class="mb-fc-grid">
+        <div class="mb-fc-full"><label>Display Label <span class="r">*</span></label><input type="text" id="mb-fc-label"></div>
+        <div class="mb-fc-full"><label>API Name <span class="r">*</span></label><input type="text" id="mb-fc-api" style="background:#f0f4f8"><span class="f-placeholder">Auto-converted to UPPER_SNAKE_CASE</span></div>
+        <div class="mb-fc-full"><label>Tooltip / Help Text</label><input type="text" id="mb-fc-help" placeholder="Optional hint for users"></div>
+      </div>
+      <div class="mb-fc-grid" id="mb-fc-extra"></div>
+      <div class="mb-fc-full" style="margin-top:8px">
+        <label style="font-size:11px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer">
+          <input type="checkbox" id="mb-fc-mand"> Required field
+        </label>
+        <label style="font-size:11px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:6px">
+          <input type="checkbox" id="mb-fc-ro"> Read-only (cannot be edited after save)
+        </label>
+      </div>
+      <div class="mb-fc-actions">
+        <button class="btn btn-s btn-sm" onclick="mbCloseFc()">Cancel</button>
+        <button class="btn btn-p btn-sm" onclick="mbSaveFc()"><i class="fas fa-check"></i> Save Field</button>
+      </div>
+    </div>
+  </div>
+  <div class="mb-foot">
+    <button class="btn btn-s" onclick="mbPrev()"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="mb-foot-right">
+      <span class="mb-step-info">Step 2 of 4</span>
+      <button class="btn btn-p" onclick="mbNext()">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+`;
+
+const MB_STEP3_HTML = `
+  <div class="mb-body">
+    <div class="mb-section-title"><i class="fas fa-columns"></i> Step 3 — Field Layout</div>
+    <p style="font-size:11px;color:var(--text3);margin-bottom:12px">Assign fields to layout sections. Drag to reorder within sections.</p>
+    <div class="ly-3col">
+      <div>
+        <div class="ly-col-hdr"><i class="fas fa-id-badge"></i> HEADER</div>
+        <div class="ly-col-bdy" id="ly-h" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="mbDropField(event,'header')">
+          <div class="ly-empty-c" id="ly-h-empty">Drag fields here</div>
+        </div>
+      </div>
+      <div>
+        <div class="ly-col-hdr"><i class="fas fa-edit"></i> MAIN BODY</div>
+        <div class="ly-col-bdy" id="ly-m" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="mbDropField(event,'main')">
+          <div class="ly-empty-c" id="ly-m-empty">Drag fields here</div>
+        </div>
+      </div>
+      <div>
+        <div class="ly-col-hdr"><i class="fas fa-sidebar"></i> SIDEBAR</div>
+        <div class="ly-col-bdy" id="ly-s" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="mbDropField(event,'sidebar')">
+          <div class="ly-empty-c" id="ly-s-empty">Drag fields here</div>
+        </div>
+      </div>
+    </div>
+    <div class="ly-avail">
+      <div class="ly-avail-hdr"><i class="fas fa-hand-pointer"></i> Available Fields — drag to assign to a section</div>
+      <div class="ly-avail-flds" id="lyAvail">${renderLyAvail()}</div>
+    </div>
+  </div>
+  <div class="mb-foot">
+    <button class="btn btn-s" onclick="mbPrev()"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="mb-foot-right">
+      <span class="mb-step-info">Step 3 of 4</span>
+      <button class="btn btn-p" onclick="mbNext()">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+`;
+
+const MB_STEP4_HTML = `
+  <div class="mb-body">
+    <div class="mb-section-title"><i class="fas fa-clipboard-check"></i> Step 4 — Review & Create</div>
+    <div class="mb-review-grid">
+      <div class="mb-review-card">
+        <div class="mb-review-hdr"><i class="fas fa-cog"></i> Module Details</div>
+        <div class="mb-review-row"><span>Module Name</span><b id="rv-name">—</b></div>
+        <div class="mb-review-row"><span>API Name</span><b id="rv-api">—</b></div>
+        <div class="mb-review-row"><span>Label</span><b id="rv-label">—</b></div>
+        <div class="mb-review-row"><span>Icon</span><b><i class="fas ${getVal('mb-icon')}"></i></b></div>
+        <div class="mb-review-row"><span>Colour</span><b style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;border-radius:3px;background:${getVal('mb-color')}"></span> ${getVal('mb-color')}</b></div>
+        <div class="mb-review-row"><span>Business Type</span><b id="rv-btype">—</b></div>
+        <div class="mb-review-row"><span>Related Module</span><b id="rv-related">—</b></div>
+      </div>
+      <div class="mb-review-card">
+        <div class="mb-review-hdr"><i class="fas fa-th-large"></i> Fields Summary</div>
+        <div class="mb-review-row"><span>Total Fields</span><b>${window._mbFields.length}</b></div>
+        <div class="mb-review-row"><span>Required</span><b>${window._mbFields.filter(f=>f.mand).length}</b></div>
+        <div class="mb-review-row"><span>Text / Email</span><b>${window._mbFields.filter(f=>['text','email','phone','website'].includes(f.type)).length}</b></div>
+        <div class="mb-review-row"><span>Numbers</span><b>${window._mbFields.filter(f=>['number','currency','percent'].includes(f.type)).length}</b></div>
+        <div class="mb-review-row"><span>Dates</span><b>${window._mbFields.filter(f=>['date','datetime'].includes(f.type)).length}</b></div>
+        <div class="mb-review-row"><span>Picklists</span><b>${window._mbFields.filter(f=>['picklist','multipicklist'].includes(f.type)).length}</b></div>
+        <div class="mb-review-row"><span>Lookups</span><b>${window._mbFields.filter(f=>f.type==='lookup').length}</b></div>
+      </div>
+    </div>
+    <div class="mb-review-fields">
+      <div class="mb-rf-title"><i class="fas fa-list"></i> All Fields</div>
+      ${window._mbFields.map((f,i)=>`<div class="mb-rf-item ${f.mand?'req':''}">
+        <span class="mb-rf-n">${i+1}</span>
+        <i class="fas ${MB_FT_ICONS[f.type]||'fa-font'} mb-rf-icon"></i>
+        <span class="mb-rf-lbl">${f.label}${f.mand?'<span class="mb-rf-req">*</span>':''}</span>
+        <span class="mb-rf-api">${f.api}</span>
+        <span class="mb-rf-type">${f.type}</span>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="mb-foot">
+    <button class="btn btn-s" onclick="mbPrev()"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="mb-foot-right">
+      <span class="mb-step-info">Step 4 of 4</span>
+      <button class="btn btn-p" onclick="mbCreate()"><i class="fas fa-check"></i> Create Module</button>
+    </div>
+  </div>
+`;
+
+const MB_FIELDTYPES = [
+  {type:'text',name:'Single Line',icon:'fa-font',sub:'Short text'},
+  {type:'textarea',name:'Multi Line',icon:'fa-align-left',sub:'Long text'},
+  {type:'email',name:'Email',icon:'fa-envelope',sub:'Email address'},
+  {type:'phone',name:'Phone',icon:'fa-phone',sub:'Phone number'},
+  {type:'website',name:'Website',icon:'fa-globe',sub:'URL field'},
+  {type:'number',name:'Number',icon:'fa-hashtag',sub:'Integer value'},
+  {type:'currency',name:'Currency',icon:'fa-rupee-sign',sub:'Money value'},
+  {type:'percent',name:'Percent',icon:'fa-percent',sub:'Percentage'},
+  {type:'date',name:'Date',icon:'fa-calendar',sub:'Date picker'},
+  {type:'datetime',name:'Date & Time',icon:'fa-clock',sub:'Date + time'},
+  {type:'picklist',name:'Picklist',icon:'fa-caret-square-down',sub:'Single select'},
+  {type:'multipicklist',name:'Multi-Select',icon:'fa-check-double',sub:'Multi select'},
+  {type:'checkbox',name:'Checkbox',icon:'fa-check-square',sub:'Yes / No'},
+  {type:'lookup',name:'Lookup',icon:'fa-search',sub:'Link module'},
+  {type:'fileupload',name:'File Upload',icon:'fa-paperclip',sub:'Attach files'},
+  {type:'address',name:'Address',icon:'fa-map-marker-alt',sub:'Full address'},
+];
+
+const MB_FT_ICONS = {text:'fa-font',textarea:'fa-align-left',email:'fa-envelope',phone:'fa-phone',website:'fa-globe',number:'fa-hashtag',currency:'fa-rupee-sign',percent:'fa-percent',date:'fa-calendar',datetime:'fa-clock',picklist:'fa-caret-square-down',multipicklist:'fa-check-double',checkbox:'fa-check-square',lookup:'fa-search',fileupload:'fa-paperclip',address:'fa-map-marker-alt'};
+
+function updateMBSteps() {
+  document.querySelectorAll('.mb-step').forEach(el => {
+    const s = parseInt(el.dataset.step);
+    el.className = 'mb-step ' + (s < window._mbStep ? 'done' : s === window._mbStep ? 'active' : '');
+  });
+}
+
+function mbAutoAPI() {
+  const n = document.getElementById('mb-name').value;
+  const api = n.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'').replace(/^[0-9]/,'_$&').toUpperCase();
+  const apiEl = document.getElementById('mb-api');
+  if (apiEl) apiEl.value = api;
+  const plEl = document.getElementById('mb-plural');
+  if (plEl && !plEl.dataset.manual) plEl.value = n;
+}
+
+function mbNext() {
+  if (window._mbStep === 1) {
+    const n = document.getElementById('mb-name').value;
+    const lbl = document.getElementById('mb-label').value;
+    const api = document.getElementById('mb-api').value;
+    if (!n || !lbl || !api) { alert('Please fill Module Name, Label, and API Name'); return; }
+  }
+  if (window._mbStep === 2) {
+    if (window._mbFields.length === 0) { alert('Add at least one field'); return; }
+    mbCloseFc();
+  }
+  if (window._mbStep === 3) {
+    // Populate review step values
+    document.getElementById('rv-name').textContent = document.getElementById('mb-name').value;
+    document.getElementById('rv-api').textContent = document.getElementById('mb-api').value;
+    document.getElementById('rv-label').textContent = document.getElementById('mb-label').value;
+    document.getElementById('rv-btype').textContent = document.getElementById('mb-btype').value;
+    document.getElementById('rv-related').textContent = document.getElementById('mb-related').value || 'None';
+    document.getElementById('rv-name').parentElement.querySelector('b i').className = 'fas ' + (document.getElementById('mb-icon').value || 'fa-box');
+    document.querySelector('.mb-review-hdr i').className = 'fas ' + (document.getElementById('mb-icon').value || 'fa-box');
+    document.querySelector('.mb-review-card:first-child .mb-review-row:nth-child(4) b').innerHTML = '<i class="fas ' + (document.getElementById('mb-icon').value || 'fa-box') + '"></i>';
+    document.querySelector('.mb-review-card:first-child .mb-review-row:nth-child(5) b').innerHTML = '<span style="width:14px;height:14px;border-radius:3px;background:' + (document.getElementById('mb-color').value || '#6f42c1') + ';display:inline-block"></span> ' + (document.getElementById('mb-color').value || '#6f42c1');
+  }
+  window._mbStep++;
+  document.getElementById('mBody').innerHTML = buildModuleBuilderHTML(window._mbStep);
+  updateMBSteps();
+  if (window._mbStep === 3) setTimeout(mbRenderLayouts, 10);
+}
+
+function mbPrev() {
+  if (window._mbStep <= 1) return;
+  mbCloseFc();
+  window._mbStep--;
+  document.getElementById('mBody').innerHTML = buildModuleBuilderHTML(window._mbStep);
+  updateMBSteps();
+}
+
+function mbAddField(type) {
+  const num = window._mbFields.filter(f=>f.type===type).length + 1;
+  const typeName = {text:'Text',textarea:'MultiLine',email:'Email',phone:'Phone',website:'Website',number:'Number',currency:'Currency',percent:'Percent',date:'Date',datetime:'DateTime',picklist:'Picklist',multipicklist:'MultiPick',checkbox:'Checkbox',lookup:'Lookup',fileupload:'File',address:'Address'}[type] || type;
+  const label = typeName + ' ' + num;
+  const api = type + '_' + num;
+  const field = { id: 'f_' + Date.now() + '_' + Math.random().toString(36).substr(2,4), type, label, api, mand: false, ro: false, help: '', values: type==='picklist'||type==='multipicklist' ? ['Option 1','Option 2','Option 3'] : [], lookupModule: 'Contacts' };
+  window._mbFields.push(field);
+  mbRenderFieldsList();
+}
+
+function mbRenderFieldsList() {
+  const list = document.getElementById('mbFieldsList');
+  const empty = document.getElementById('mbEmptyMsg');
+  const count = document.getElementById('mbFCount');
+  if (!list) return;
+  count && (count.textContent = window._mbFields.length);
+  if (window._mbFields.length === 0) {
+    list.innerHTML = '<div class="mb-empty" id="mbEmptyMsg"><i class="fas fa-mouse-pointer"></i><br>Click field types above to add them</div>';
+    return;
+  }
+  list.innerHTML = window._mbFields.map((f,i) => `
+    <div class="mb-added-item ${window._mbSelField===f.id?'sel':''}" onclick="mbSelectField('${f.id}')">
+      <div class="mb-ai">
+        <div class="mb-ai-icon"><i class="fas ${MB_FT_ICONS[f.type]||'fa-font'}"></i></div>
+        <div>
+          <div class="mb-ai-label">${f.label}${f.mand?'<span class="mb-mand">*</span>':''}</div>
+          <div class="mb-ai-api">${f.api}</div>
+          <div class="mb-ai-type">${f.type}</div>
+        </div>
+      </div>
+      <div class="mb-ai-actions">
+        <button class="mb-ai-del" onclick="event.stopPropagation();mbDelField('${f.id}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function mbSelectField(id) {
+  mbCloseFc();
+  window._mbSelField = id;
+  const f = window._mbFields.find(x=>x.id===id);
+  if (!f) return;
+  document.getElementById('mb-fc-label').value = f.label;
+  document.getElementById('mb-fc-api').value = f.api;
+  document.getElementById('mb-fc-help').value = f.help || '';
+  document.getElementById('mb-fc-mand').checked = f.mand;
+  document.getElementById('mb-fc-ro').checked = f.ro;
+
+  let extraHTML = '';
+  if (f.type === 'picklist' || f.type === 'multipicklist') {
+    extraHTML = '<div class="mb-fc-full"><label>Options <span class="f-placeholder">(one per line)</span></label><textarea id="mb-fc-values" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;font-size:12px;resize:vertical">' + (f.values||[]).join('\n') + '</textarea></div>';
+  } else if (f.type === 'lookup') {
+    extraHTML = '<div class="mb-fc-full"><label>Related Module</label><select id="mb-fc-lookup" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"><option>Contacts</option><option>Accounts</option><option>Deals</option><option>Leads</option><option>Products</option></select></div>';
+    setTimeout(()=>{ const sel=document.getElementById('mb-fc-lookup'); if(sel) sel.value=f.lookupModule||'Contacts'; },10);
+  } else if (['number','currency','percent'].includes(f.type)) {
+    extraHTML = '<div class="mb-fc-full"><label>Validation</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="number" id="mb-fc-min" placeholder="Min value"><input type="number" id="mb-fc-max" placeholder="Max value"></div></div>';
+  }
+  document.getElementById('mb-fc-extra').innerHTML = extraHTML;
+  document.getElementById('mbFcPanel').classList.add('open');
+  mbRenderFieldsList();
+}
+
+function mbSaveFc() {
+  const f = window._mbFields.find(x=>x.id===window._mbSelField);
+  if (!f) return;
+  const label = document.getElementById('mb-fc-label').value.trim();
+  if (!label) { alert('Label is required'); return; }
+  f.label = label;
+  f.api = document.getElementById('mb-fc-api').value.trim() || f.api;
+  f.help = (document.getElementById('mb-fc-help')||{value:''}).value;
+  f.mand = (document.getElementById('mb-fc-mand')||{checked:false}).checked;
+  f.ro = (document.getElementById('mb-fc-ro')||{checked:false}).checked;
+  if (f.type === 'picklist' || f.type === 'multipicklist') {
+    f.values = (document.getElementById('mb-fc-values')||{value:''}).value.split('\n').map(v=>v.trim()).filter(v=>v);
+    if (f.values.length < 2) { alert('Add at least 2 options'); return; }
+  }
+  if (f.type === 'lookup') {
+    f.lookupModule = (document.getElementById('mb-fc-lookup')||{value:'Contacts'}).value;
+  }
+  mbCloseFc();
+  mbRenderFieldsList();
+}
+
+function mbCloseFc() {
+  window._mbSelField = null;
+  document.getElementById('mbFcPanel').classList.remove('open');
+  mbRenderFieldsList();
+}
+
+function mbDelField(id) {
+  if (!confirm('Remove this field?')) return;
+  window._mbFields = window._mbFields.filter(f=>f.id!==id);
+  ['header','main','sidebar'].forEach(s=>{ window._mbLayouts[s]=window._mbLayouts[s].filter(f=>f.id!==id); });
+  if (window._mbSelField === id) mbCloseFc();
+  else mbRenderFieldsList();
+}
+
+function mbRenderLayouts() {
+  ['h','m','s'].forEach(s => {
+    const el = document.getElementById('ly-' + s);
+    const empty = document.getElementById('ly-' + s + '-empty');
+    if (!el) return;
+    const key = {h:'header',m:'main',s:'sidebar'}[s];
+    const fields = window._mbLayouts[key];
+    if (empty) empty.style.display = fields.length ? 'none' : 'block';
+    el.innerHTML = (fields.length ? '' : '<div class="ly-empty-c">Drag fields here</div>') + fields.map(f => `<div class="ly-col-item" draggable="true" ondragstart="mbDragField(event,'${f.id}')"><i class="fas ${MB_FT_ICONS[f.type]||'fa-font'}"></i> ${f.label}</div>`).join('');
+  });
+  const avail = document.getElementById('lyAvail');
+  if (avail) avail.innerHTML = renderLyAvail();
+}
+
+function renderLyAvail() {
+  const assigned = new Set([...window._mbLayouts.header,...window._mbLayouts.main,...window._mbLayouts.sidebar].map(f=>f.id));
+  const unassigned = window._mbFields.filter(f=>!assigned.has(f.id));
+  if (!unassigned.length) return '<span style="font-size:10px;color:var(--text3)">All fields assigned</span>';
+  return unassigned.map(f => `<div class="ly-avail-fld" draggable="true" ondragstart="mbDragField(event,'${f.id}')"><i class="fas ${MB_FT_ICONS[f.type]||'fa-font'}"></i> ${f.label}</div>`).join('');
+}
+
+let mbDragId = null;
+function mbDragField(e, id) { mbDragId = id; e.dataTransfer.setData('text', id); }
+function mbDropField(e, section) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (!mbDragId) return;
+  const field = window._mbFields.find(f=>f.id===mbDragId);
+  if (!field) return;
+  ['header','main','sidebar'].forEach(s => { window._mbLayouts[s] = window._mbLayouts[s].filter(f=>f.id!==mbDragId); });
+  window._mbLayouts[section].push(field);
+  mbDragId = null;
+  mbRenderLayouts();
+}
+
+function getVal(id) { return (document.getElementById(id)||{value:''}).value; }
+
+function mbCreate() {
+  const name = document.getElementById('mb-name').value.trim();
+  const label = document.getElementById('mb-label').value.trim();
+  const api = document.getElementById('mb-api').value.trim();
+  if (!name || !label || !api) { alert('Fill all required fields'); return; }
+
+  const store = getStore();
+  if (!store.CustomModules) store.CustomModules = [];
+  const fieldNames = window._mbFields.map(f=>f.api);
+  const newModName = name.replace(/\s+/g,'');
+
+  CFG[newModName] = {
+    icon: (document.getElementById('mb-icon')||{value:'fa-box'}).value,
+    color: (document.getElementById('mb-color')||{value:'#6f42c1'}).value,
+    pk: 'id',
+    fields: ['id','Created',...fieldNames],
+    f0: fieldNames[0] || 'name',
+    label,
+    plural: (document.getElementById('mb-plural')||{value:name}).value || name,
+    isCustom: true,
+    btype: (document.getElementById('mb-btype')||{value:'custom'}).value,
+    relatedModule: (document.getElementById('mb-related')||{value:''}).value,
+    customFields: window._mbFields,
+    layouts: window._mbLayouts,
   };
-  document.getElementById('modalOverlay').classList.add('open');
+
+  store.CustomModules.push({
+    id: 'CM' + Date.now(),
+    Module_Name: newModName,
+    Module_Label: label,
+    Module_Plural: (document.getElementById('mb-plural')||{value:name}).value || name,
+    Module_Icon: (document.getElementById('mb-icon')||{value:'fa-box'}).value,
+    Module_Color: (document.getElementById('mb-color')||{value:'#6f42c1'}).value,
+    Biz_Type: (document.getElementById('mb-btype')||{value:'custom'}).value,
+    Related_Module: (document.getElementById('mb-related')||{value:''}).value,
+    Fields: JSON.stringify(window._mbFields),
+    Layouts: JSON.stringify(window._mbLayouts),
+    Created: new Date().toISOString().slice(0,10),
+    Record_Count: 0,
+  });
+
+  saveStore(store);
+  closeModal();
+  showSettingsTab('modules');
+  alert('Module "' + label + '" created with ' + window._mbFields.length + ' fields!');
 }
 
 function saveModalForm() {
